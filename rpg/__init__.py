@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
@@ -37,14 +37,12 @@ def not_authorized(error):
     app.logger.error(error)
     return error
 
-from app.controllers.dashboard import mod_dashboard as dashboard_module
-from app.controllers.dispositivo import mod_dispositivo as dispositivo_module
-from app.controllers.monitor import mod_monitor as monitor_module
-from app.controllers.usuario import mod_usuario as usuario_module
+from app.core import models
 
-app.register_blueprint(dashboard_module)
-app.register_blueprint(dispositivo_module)
-app.register_blueprint(monitor_module)
-app.register_blueprint(usuario_module)
+from app.gm.controllers import mod_gm as gm_module
+from app.player.controllers import mod_player as player_module
+
+app.register_blueprint(gm_module)
+app.register_blueprint(player_module)
 
 db.create_all()
