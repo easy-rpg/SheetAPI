@@ -39,10 +39,10 @@ def not_authorized(error):
 
 from rpg.core import models
 
-from rpg.gm.controllers import mod_gm as gm_module
-from rpg.player.controllers import mod_player as player_module
+from rpg.mestre.controllers import mod_mestre as mestre_module
+from rpg.jogador.controllers import mod_jogador as jogador_module
 
-app.register_blueprint(gm_module)
-app.register_blueprint(player_module)
+app.register_blueprint(mestre_module)
+app.register_blueprint(jogador_module)
 
 db.create_all()
