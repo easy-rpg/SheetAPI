@@ -37,10 +37,10 @@ def not_authorized(error):
     app.logger.error(error)
     return error
 
-from app.core import models
+from rpg.core import models
 
-from app.gm.controllers import mod_gm as gm_module
-from app.player.controllers import mod_player as player_module
+from rpg.gm.controllers import mod_gm as gm_module
+from rpg.player.controllers import mod_player as player_module
 
 app.register_blueprint(gm_module)
 app.register_blueprint(player_module)

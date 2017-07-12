@@ -4,7 +4,7 @@ DB_USER = 'root'
 DB_PASS = 'root'
 DB_HOST = 'localhost'
 #DB_PORT = '80'
-DB_NAME = 'homecontrol'
+DB_NAME = 'rpg'
 
 # Define the application directory
 import os

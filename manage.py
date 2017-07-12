@@ -1,3 +1,3 @@
-from app import manager
+from rpg import manager
 
 manager.run()
