@@ -10,7 +10,7 @@ def index():
     if g.usuario is None:
         return redirect('/login')
 
-    return render_template('core/index.html')
+    return render_template('core/index.html', usuario=g.usuario)
 
 
 @mod_core.route('/login', methods=['GET', 'POST'])
@@ -26,8 +26,8 @@ def login():
             return redirect('/')
         else:
             flash('Email ou senha incorretos. Tente novamente!')
-            return render_template('core/login.html', form=form)
-    return render_template('core/login.html', form=form)
+            return render_template('core/login.html', form=form, usuario=g.usuario)
+    return render_template('core/login.html', form=form, usuario=g.usuario)
 
 
 @mod_core.route('/logout')

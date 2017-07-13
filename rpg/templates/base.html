@@ -20,8 +20,14 @@
 					<a class="navbar-brand" href="/">Home</a>
 				</div>
 				 <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+					 {% if usuario is none %}
+					 <ul class="nav navbar-nav navbar-right">
+						 <li><a href="/login">Entrar</a></li>
+					 </ul>
+					 {% else %}
 					 <ul class="nav navbar-nav">
 						 <li><a href="/campanhas">Campanhas</a></li>
+						 <li><a href="/personagens">Personagens</a></li>
 					 </ul>
 					 <ul class="nav navbar-nav navbar-right">
 						 <li class="dropdown">
@@ -32,6 +38,7 @@
 							 </ul>
 						 </li>
 					 </ul>
+					 {% endif %}
 				 </div>
 			</div>
 		</nav>
