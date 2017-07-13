@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, flash, session, g, redirect
-from rpg.core.forms import LoginForm
+from flask import Blueprint, render_template, flash, session, g, redirect, request
+from rpg import db
+from rpg.core.forms import LoginForm, UsuarioForm
 from rpg.core.models import Usuario
 
 mod_core = Blueprint('core', __name__)
@@ -20,8 +21,7 @@ def login():
         usuario = Usuario.query.filter_by(email=form.email.data).first()
 
         if usuario is not None and usuario.senha == form.senha.data:
-            flash('Usuario logado!')
-            session['logged_in'] = True
+            flash('Seja bem vindo '+usuario.nome+'!')
             session['id_usuario'] = usuario.id_usuario
             return redirect('/')
         else:
@@ -32,7 +32,7 @@ def login():
 
 @mod_core.route('/logout')
 def logout():
-    session.pop('logged_in', None)
+    session.pop('id_usuario', None)
     flash('You were logged out')
     return redirect('/')
 

@@ -5,6 +5,9 @@ from wtforms.validators import DataRequired, NumberRange
 from wtforms_alchemy import ModelForm
 from rpg.core.models import Usuario
 
-class LoginForm(ModelForm, FlaskForm):
+class LoginForm(FlaskForm):
+    email = EmailField(u'Email', validators=[DataRequired()])
+    senha = PasswordField(u'Senha', validators=[DataRequired()])
+
     class Meta:
         model = Usuario
