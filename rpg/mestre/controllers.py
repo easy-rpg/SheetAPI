@@ -1,7 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, render_template
 
-mod_mestre = Blueprint('mestre', __name__, url_prefix='/mestre', template_folder='templates')
+mod_mestre = Blueprint('mestre', __name__, url_prefix='/mestre')
 
 @mod_mestre.route('/')
 def index():
-    return 'index mestre'
+    return render_template('mestre/index.html')
