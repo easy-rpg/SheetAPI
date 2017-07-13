@@ -1,4 +1,5 @@
 from rpg import db
+from sqlalchemy_utils import EmailType, PasswordType
 
 
 mestres = db.Table(
@@ -19,8 +20,11 @@ class Usuario(db.Model):
     __tablename__ = 'usuario'
     id_usuario = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80))
-    email = db.Column(db.String(50), unique=True)
-    senha = db.Column(db.String(64))
+    email = db.Column(EmailType, unique=True)
+    senha = db.Column(PasswordType(
+            schemes=['pbkdf2_sha512']
+        )
+    )
 
     personagens = db.relationship('Personagem')
 
