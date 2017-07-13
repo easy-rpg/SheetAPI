@@ -67,7 +67,6 @@ class Classe(db.Model):
     __tablename__ = 'classe'
     id_classe = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50))
-    descricao = db.Column(db.String(200))
 
     tipo = db.Column(db.String(30))
     __mapper_args__ = {'polymorphic_identity': __tablename__,
