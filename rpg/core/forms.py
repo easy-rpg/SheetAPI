@@ -9,5 +9,6 @@ class LoginForm(FlaskForm):
     email = EmailField(u'Email', validators=[DataRequired()])
     senha = PasswordField(u'Senha', validators=[DataRequired()])
 
+class UsuarioForm(ModelForm, FlaskForm):
     class Meta:
         model = Usuario

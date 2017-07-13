@@ -46,13 +46,10 @@ def campanhas():
 def novo_usuario():
     form = UsuarioForm()
     if form.validate_on_submit():
-        if form.is_admin.data:
-            usuario = Administrador(form.nome.data, form.email.data, form.senha.data)
-        else:
-            usuario = Usuario(form.nome.data, form.email.data, form.senha.data)
+        usuario = Usuario(form.nome.data, form.email.data, form.senha.data)
         db.session.add(usuario)
         db.session.commit()
         flash('Usuário criado com sucesso')
 
         return redirect('/')
-    return render_template('usuario/cadastrar.html', title='Sign In', form=form)
+    return render_template('core/cadastrar.html', title='Sign In', form=form)

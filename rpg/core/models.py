@@ -79,11 +79,13 @@ class Classe(db.Model):
 class ClassePrestigio(Classe):
     __tablename__ = 'classe_prestigio'
     id_classe = db.Column(db.Integer(), db.ForeignKey("classe.id_classe", ondelete="CASCADE"), primary_key=True)
+    nivel_max = db.Column(db.Integer)
 
     __mapper_args__ = {'polymorphic_identity': __tablename__}
 
-    def __init__(self, nome):
+    def __init__(self, nome, nivel_max):
         Classe.__init__(self, nome)
+        self.nivel_max = nivel_max
 
 
 class InstanciaClasse(db.Model):
