@@ -1,5 +1,62 @@
 {% extends "base.html" %}
-
 {% block content %}
-Hello core
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="col-md-4 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Campanhas</div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Campanha</th>
+                            <th>Participação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>File</td>
+                            <td>Mestre</td>
+                            <td><a href="#">Ver</a></td>
+                        </tr>
+                        <tr>
+                            <td>?</td>
+                            <td>Mestre</td>
+                            <td><a href="#">Ver</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-1">
+             <div class="panel panel-default">
+                <div class="panel-heading">Personagens</div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Classe</th>
+                            <th>Campanha</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hieriling</td>
+                            <td>Clerigo, Devoto da Guerra</td>
+                            <td>Filé</td>
+                            <td><a href="#">Ver</a></td>
+                        </tr>
+                        <tr>
+                            <td>Assis</td>
+                            <td>Bárbaro, Bárbaro Frenético</td>
+                            <td>Filé</td>
+                            <td><a href="#">Ver</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
