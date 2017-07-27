@@ -121,7 +121,7 @@ class InstanciaClasse(db.Model):
         self.nivel = nivel
 
     def __str__(self):
-        return self.classe.nome
+        return self.classe.nome+' ('+str(self.nivel)+')'
 
 
 class Personagem(db.Model):
@@ -152,7 +152,7 @@ class Personagem(db.Model):
     def str_classes(self):
         stra = ''
         for x in range(len(self.classes)):
-            stra += self.classes[x].classe.nome
+            stra += str(self.classes[x])
             if x != (len(self.classes) - 1):
                 stra += ', '
         return stra
