@@ -2,18 +2,18 @@ from rpg.core.models import *
 from rpg import db
 
 racas = []
-racas.append('Anão')
-racas.append('Elfo')
-racas.append('Fada')
-racas.append('Gnomo')
-racas.append('Halfling')
-racas.append('Humano')
-racas.append('Orc')
-racas.append('Meio-Elfo')
-racas.append('Meio Orc')
-# racas.append('')
-# racas.append('')
-# racas.append('')
+racas.append(Raca('Anão'))
+racas.append(Raca('Elfo'))
+racas.append(Raca('Fada'))
+racas.append(Raca('Gnomo'))
+racas.append(Raca('Halfling'))
+racas.append(Raca('Humano'))
+racas.append(Raca('Orc'))
+racas.append(Raca('Meio-Elfo'))
+racas.append(Raca('Meio Orc'))
+# racas.append(Raca(''))
+# racas.append(Raca(''))
+# racas.append(Raca(''))
 
 
 for raca in racas:
