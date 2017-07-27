@@ -14,7 +14,26 @@
         </ul>
     </div>
     <div class="col-md-10">
-
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Classe</th>
+                    <th>Campanha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for personagem in usuario.personagens %}
+                <tr>
+                    <td>{{ personagem }}</td>
+                    <td>{{ personagem.str_classes() }}</td>
+                    <td>{{ personagem.mesa.campanha.nome }}</td>
+                    <td><a href="#">Ver</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center">{{ personagem }}</h1>
+    <hr>
+    <div class="col-md-2">
+        <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+            <li><a href="/personagens/">Personagens</a></li>
+            <li class="active">{{ personagem }}</li>
+        </ol>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+
+    </div>
+</div>
+{% endblock %}
