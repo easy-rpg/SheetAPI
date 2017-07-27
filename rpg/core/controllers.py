@@ -41,7 +41,12 @@ def logout():
 
 @mod_core.route('/campanhas')
 def campanhas():
-    return 'oi'
+    return render_template('/core/campanhas.html', usuario=g.usuario)
+
+
+@mod_core.route('/personagens')
+def personagens():
+    return render_template('/core/personagens.html', usuario=g.usuario)
 
 
 @mod_core.route('/novo_usuario')
