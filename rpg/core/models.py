@@ -1,19 +1,6 @@
 from rpg import db
 from sqlalchemy_utils import EmailType, PasswordType
 
-campanha_mestres = db.Table(
-    'campanha_mestres',
-    db.Column('id_campanha', db.Integer, db.ForeignKey('campanha.id_campanha')),
-    db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario'))
-)
-
-campanha_jogadores = db.Table(
-    'campanha_jogadores',
-    db.Column('id_campanha', db.Integer, db.ForeignKey('campanha.id_campanha')),
-    db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario'))
-)
-
-
 class Usuario(db.Model):
     __tablename__ = 'usuario'
     id_usuario = db.Column(db.Integer, primary_key=True)
@@ -21,8 +8,10 @@ class Usuario(db.Model):
     email = db.Column(EmailType, unique=True)
     senha = db.Column(PasswordType(
         schemes=['pbkdf2_sha512']
+        )
     )
-    )
+
+    participacoes = db.relationship('Participacao', back_populates="usuario")
 
     personagens = db.relationship('Personagem', back_populates="usuario")
 
@@ -42,17 +31,7 @@ class Campanha(db.Model):
 
     mesas = db.relationship('Mesa', back_populates='campanha')
 
-    mestres = db.relationship(
-        'Usuario',
-        secondary=campanha_mestres,
-        backref=db.backref('campanhas_mestradas', lazy='dynamic')
-    )
-
-    jogadores = db.relationship(
-        'Usuario',
-        secondary=campanha_jogadores,
-        backref=db.backref('campanhas_participando', lazy='dynamic')
-    )
+    participacoes = db.relationship('Participacao', back_populates='campanha')
 
     def __init__(self, nome=None):
         self.nome = nome
@@ -60,23 +39,20 @@ class Campanha(db.Model):
     def __str__(self):
         return self.nome
 
-    def papel(self, usuario):
-        if usuario in self.mestres:
-            return 'Mestre'
-        elif usuario in self.jogadores:
-            return 'Jogador'
-        else:
-            return '-'
 
-    def is_mestre(self, usuario):
-        if usuario in self.mestres:
-            return True
-        return False
+class Participacao(db.Model):
+    __tablename__ = 'participacao'
 
-    def is_jogador(self, usuario):
-        if usuario in self.jogadores:
-            return True
-        return False
+    campanha = db.relationship("Campanha", back_populates="participacoes")
+    id_campanha = db.Column('id_campanha', db.Integer, db.ForeignKey('campanha.id_campanha'), primary_key=True)
+
+    usuario = db.relationship("Usuario", back_populates='participacoes')
+    id_usuario = db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario'), primary_key=True)
+
+    papel = db.Column(db.String(10))
+
+    def __init__(self, papel):
+        self.papel = papel
 
 
 class Mesa(db.Model):

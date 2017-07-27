@@ -1,19 +1,26 @@
 from rpg.core.models import *
 from rpg import db
 
-rodrigo = Usuario(nome='Rodrigo', email='rodrigondec@gmail.com', senha='rodrigo123')
-# rodrigo = Usuario.query.filter_by(email='rodrigondec@gmail.com').first()
-db.session.add(rodrigo)
-
-clara = Usuario(nome='Clara', email='claranobre@gmail.com', senha='clara123')
-# clara = Usuario.query.filter_by(email='claranobre@gmail.com').first()
-db.session.add(clara)
+# rodrigo = Usuario(nome='Rodrigo', email='rodrigondec@gmail.com', senha='rodrigo123')
+rodrigo = Usuario.query.filter_by(email='rodrigondec@gmail.com').first()
+# db.session.add(rodrigo)
+#
+# clara = Usuario(nome='Clara', email='claranobre@gmail.com', senha='clara123')
+clara = Usuario.query.filter_by(email='claranobre@gmail.com').first()
+# db.session.add(clara)
 
 file = Campanha(nome='Campanha do Filé')
 # file = Campanha.query.filter_by(id_campanha=1).first()
-file.mestres.append(rodrigo)
-file.jogadores.append(clara)
 db.session.add(file)
+
+p = Participacao('Mestre')
+p.usuario = rodrigo
+p.campanha = file
+db.session.add(p)
+p2 = Participacao('Jogador')
+p2.usuario = clara
+p2.campanha = file
+db.session.add(p2)
 
 mesa_file_1 = Mesa(nome='Mesa 1')
 # mesa_file_1 = Mesa.query.filter_by(id_mesa=1).first()
