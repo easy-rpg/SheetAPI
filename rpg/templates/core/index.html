@@ -16,7 +16,7 @@
                     <tbody>
                     {% for campanha in campanhas %}
                         <tr>
-                            <td>{{ campanha.nome }}</td>
+                            <td>{{ campanha }}</td>
                             <td>{{ campanha.papel(usuario) }}</td>
                             {% if campanha.papel(usuario) == 'Mestre' %}
                             <td><a href="#">Ver M</a></td>
@@ -44,7 +44,7 @@
                     <tbody>
                         {% for personagem in usuario.personagens %}
                         <tr>
-                            <td>{{ personagem.nome }}</td>
+                            <td>{{ personagem }}</td>
                             <td>{{ personagem.str_classes() }}</td>
                             <td>{{ personagem.mesa.campanha.nome }}</td>
                             <td><a href="#">Ver</a></td>

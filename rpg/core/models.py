@@ -1,13 +1,11 @@
 from rpg import db
 from sqlalchemy_utils import EmailType, PasswordType
 
-
 campanha_mestres = db.Table(
     'campanha_mestres',
     db.Column('id_campanha', db.Integer, db.ForeignKey('campanha.id_campanha')),
     db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario'))
 )
-
 
 campanha_jogadores = db.Table(
     'campanha_jogadores',
@@ -22,8 +20,8 @@ class Usuario(db.Model):
     nome = db.Column(db.String(80))
     email = db.Column(EmailType, unique=True)
     senha = db.Column(PasswordType(
-            schemes=['pbkdf2_sha512']
-        )
+        schemes=['pbkdf2_sha512']
+    )
     )
 
     personagens = db.relationship('Personagem', back_populates="usuario")
@@ -32,6 +30,9 @@ class Usuario(db.Model):
         self.nome = nome
         self.email = email
         self.senha = senha
+
+    def __str__(self):
+        return self.nome
 
 
 class Campanha(db.Model):
@@ -55,6 +56,9 @@ class Campanha(db.Model):
 
     def __init__(self, nome=None):
         self.nome = nome
+
+    def __str__(self):
+        return self.nome
 
     def papel(self, usuario):
         if usuario in self.mestres:
@@ -87,6 +91,9 @@ class Mesa(db.Model):
 
     def __init__(self, nome=None):
         self.nome = nome
+
+    def __str__(self):
+        return self.nome
 
 
 class Raca(db.Model):
@@ -140,6 +147,7 @@ class InstanciaClasse(db.Model):
     def __str__(self):
         return self.classe.nome
 
+
 class Personagem(db.Model):
     __tablename__ = 'personagem'
     id_personagem = db.Column(db.Integer, primary_key=True)
@@ -162,10 +170,13 @@ class Personagem(db.Model):
         self.nome = nome
         self.descricao = descricao
 
+    def __str__(self):
+        return self.nome
+
     def str_classes(self):
-        str = ''
-        for x in range (len(self.classes)):
-            str += self.classes[x].classe.nome
-            if x != (len(self.classes)-1):
-                str += ', '
-        return str
+        stra = ''
+        for x in range(len(self.classes)):
+            stra += self.classes[x].classe.nome
+            if x != (len(self.classes) - 1):
+                stra += ', '
+        return stra
