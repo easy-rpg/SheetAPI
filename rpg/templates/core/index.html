@@ -14,16 +14,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for campanha in campanhas %}
                         <tr>
-                            <td>File</td>
-                            <td>Mestre</td>
-                            <td><a href="#">Ver</a></td>
+                            <td>{{ campanha.nome }}</td>
+                            <td>{{ campanha.papel(usuario) }}</td>
+                            {% if campanha.papel(usuario) == 'jogador' %}
+                            <td><a href="#">Ver M</a></td>
+                            {% elif campanha.papel(usuario) == 'jogador' %}
+                            <td><a href="#">Ver J</a></td>
+                            {% endif %}
                         </tr>
-                        <tr>
-                            <td>?</td>
-                            <td>Mestre</td>
-                            <td><a href="#">Ver</a></td>
-                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -41,18 +42,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for personagem in usuario.personagens %}
                         <tr>
-                            <td>Hieriling</td>
-                            <td>Clerigo, Devoto da Guerra</td>
-                            <td>Filé</td>
+                            <td>{{ personagem.nome }}</td>
+                            <td>{{ personagem.classes }}</td>
+                            <td>{{ personagem.campanha.nome }}</td>
                             <td><a href="#">Ver</a></td>
                         </tr>
-                        <tr>
-                            <td>Assis</td>
-                            <td>Bárbaro, Bárbaro Frenético</td>
-                            <td>Filé</td>
-                            <td><a href="#">Ver</a></td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
              </div>
