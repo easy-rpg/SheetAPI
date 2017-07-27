@@ -137,6 +137,8 @@ class InstanciaClasse(db.Model):
         self.classe = classe
         self.nivel = nivel
 
+    def __str__(self):
+        return self.classe.nome
 
 class Personagem(db.Model):
     __tablename__ = 'personagem'
@@ -159,3 +161,11 @@ class Personagem(db.Model):
     def __init__(self, nome=None, descricao=None):
         self.nome = nome
         self.descricao = descricao
+
+    def str_classes(self):
+        str = ''
+        for x in range (len(self.classes)):
+            str += self.classes[x].classe.nome
+            if x != (len(self.classes)-1):
+                str += ', '
+        return str
