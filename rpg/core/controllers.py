@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, flash, session, g, redirect, request
+from flask import Blueprint, render_template, flash, session, g, redirect
 from rpg import db
 from rpg.core.forms import LoginForm, UsuarioForm
-from rpg.core.models import Usuario, Campanha
+from rpg.core.models import Usuario
 
 mod_core = Blueprint('core', __name__)
 
@@ -11,9 +11,7 @@ def index():
     if g.usuario is None:
         return redirect('/login')
 
-    campanhas = Campanha.query.all()
-
-    return render_template('core/index.html', campanhas=campanhas, usuario=g.usuario)
+    return render_template('core/index.html', usuario=g.usuario)
 
 
 @mod_core.route('/login', methods=['GET', 'POST'])
@@ -41,12 +39,10 @@ def logout():
 
 @mod_core.route('/campanhas')
 def campanhas():
+    if g.usuario is None:
+        return redirect('/login')
+
     return render_template('/core/campanhas.html', usuario=g.usuario)
-
-
-@mod_core.route('/personagens')
-def personagens():
-    return render_template('/core/personagens.html', usuario=g.usuario)
 
 
 @mod_core.route('/novo_usuario')

@@ -9,20 +9,16 @@
                     <thead>
                         <tr>
                             <th>Campanha</th>
-                            <th>Participação</th>
+                            <th>Papel</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for campanha in campanhas %}
+                    {% for participacao in usuario.participacoes %}
                         <tr>
-                            <td>{{ campanha }}</td>
-                            <td>{{ campanha.papel(usuario) }}</td>
-                            {% if campanha.papel(usuario) == 'Mestre' %}
-                            <td><a href="#">Ver M</a></td>
-                            {% elif campanha.papel(usuario) == 'Jogador' %}
-                            <td><a href="#">Ver J</a></td>
-                            {% endif %}
+                            <td>{{ participacao.campanha }}</td>
+                            <td>{{ participacao.papel }}</td>
+                            <td><a href="/campanha/{{ participacao.campanha.id_campanha }}">Ver M</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -47,7 +43,7 @@
                             <td>{{ personagem }}</td>
                             <td>{{ personagem.str_classes() }}</td>
                             <td>{{ personagem.mesa.campanha.nome }}</td>
-                            <td><a href="#">Ver</a></td>
+                            <td><a href="/personagem/{{ personagem.id_personagem }}">Ver</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
