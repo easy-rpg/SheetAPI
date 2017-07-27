@@ -52,11 +52,11 @@ def load_current_user():
 
 
 from rpg.core.controllers import mod_core as core_module
-from rpg.mestre.controllers import mod_mestre as mestre_module
-from rpg.jogador.controllers import mod_jogador as jogador_module
+from rpg.campanha.controllers import mod_campanha as campanha_module
+from rpg.personagem.controllers import mod_personagem as personagem_module
 
 app.register_blueprint(core_module)
-app.register_blueprint(mestre_module)
-app.register_blueprint(jogador_module)
+app.register_blueprint(campanha_module)
+app.register_blueprint(personagem_module)
 
 db.create_all()

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
-mod_mestre = Blueprint('mestre', __name__, url_prefix='/mestre')
+mod_campanha = Blueprint('campanha', __name__, url_prefix='/campanha')
 
-@mod_mestre.route('/')
+@mod_campanha.route('/')
 def index():
-    return render_template('mestre/index.html')
+    return render_template('campanha/index.html')

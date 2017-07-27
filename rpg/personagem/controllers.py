@@ -1,7 +1,21 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, g
+from rpg.core.models import Personagem
 
-mod_jogador = Blueprint('jogador', __name__, url_prefix='/jogador')
+mod_personagem = Blueprint('personagem', __name__, url_prefix='/personagem')
 
-@mod_jogador.route('/')
+
+@mod_personagem.route('/')
 def index():
-    return render_template('jogador/index.html')
+    if g.usuario is None:
+        return redirect('/login')
+
+    return render_template('/personagem/index.html', usuario=g.usuario)
+
+
+@mod_personagem.route('/<id_personagem>')
+def ver_personagem(id_personagem):
+    if g.usuario is None:
+        return redirect('/login')
+
+    personagem = Personagem.query.filter_by(id_personagem=id_personagem).first()
+    return render_template('/personagem/ver.html', personagem=personagem, usuario=g.usuario)
