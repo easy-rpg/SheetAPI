@@ -3,10 +3,10 @@
 <div class="container-fluid">
     <h1 class="text-center">{{ personagem }}</h1>
     <hr>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-            <li><a href="/personagens/">Personagens</a></li>
+            <li><a href="/personagem/">Personagens</a></li>
             <li class="active">{{ personagem }}</li>
         </ol>
         <ul class="nav nav-pills nav-stacked">
@@ -14,8 +14,395 @@
             <li><a href="#">2</a></li>
         </ul>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ficha</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                Nome do jogador: <u> {{ usuario }}</u>
+                            </div>
+                            <div class="col-md-3">
+                                Nome do personagem: <u>{{ personagem }}</u>
+                            </div>
+                            <div class="col-md-4">
+                                Classes: <u> {{ personagem.str_classes() }}</u>
+                            </div>
+                            <div class="col-md-2">
+                                Raça: <u> {{ personagem.raca }}</u>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                Tendência:
+                            </div>
+                            <div class="col-md-3">
+                                Divindade:
+                            </div>
+                            <div class="col-md-3">
+                                Tamanho:
+                            </div>
+                            <div class="col-md-3">
+                                Idade:
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                Sexo:
+                            </div>
+                            <div class="col-md-3">
+                                Altura:
+                            </div>
+                            <div class="col-md-3">
+                                Peso:
+                            </div>
+                            <div class="col-md-3">
+                                Campanha: <u>{{ personagem.mesa.campanha }}</u>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table class="table table-condensed table-hover text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Atributo</th>
+                                            <th>Valor</th>
+                                            <th>Mod</th>
+                                            <th>Valor temporário</th>
+                                            <th>Mod temporário</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="info">FOR</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info">DES</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info">CON</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info">INT</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info">SAB</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="info">CAR</td>
+                                            <td>18</td>
+                                            <td>+4</td>
+                                            <td contenteditable="true"></td>
+                                            <td contenteditable="true">+</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <table class="table table-condensed table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Total (10+)</th>
+                                                    <th>Bonus de armadura</th>
+                                                    <th>DES</th>
+                                                    <th>Outros</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="info">CA</td>
+                                                    <td contenteditable="true"></td>
+                                                    <td>6</td>
+                                                    <td contenteditable="true">2</td>
+                                                    <td contenteditable="true"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <table class="table table-condensed table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Total (10+)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="info">Toque</td>
+                                                    <td contenteditable="true"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <table class="table table-condensed table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Total (10+)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="info">Surpresa</td>
+                                                    <td contenteditable="true"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <table class="table table-condensed table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-1"></th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="info">HP</td>
+                                                    <td>190</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="info">PV Atual</td>
+                                                    <td contenteditable="true"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="info">Redução de dano</td>
+                                                    <td contenteditable="true"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <table class="table table-condensed table-hover text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-1"></th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="info">RM</td>
+                                                            <td contenteditable="true"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <table class="table table-condensed table-hover text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-1"></th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="info">Desloc.</td>
+                                                            <td contenteditable="true"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table class="table table-condensed table-hover text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Total</th>
+                                                            <th>DES</th>
+                                                            <th>Outros</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="info">Iniciativa</td>
+                                                            <td contenteditable="true"></td>
+                                                            <td>4</td>
+                                                            <td contenteditable="true"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <table class="table table-condensed table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Total</th>
+                                    <th>Base</th>
+                                    <th>Atributo</th>
+                                    <th>Outros</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="info">FORTITUDE</td>
+                                    <td contenteditable="true"></td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                                <tr>
+                                    <td class="info">REFLEXOS</td>
+                                    <td contenteditable="true"></td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                                <tr>
+                                    <td class="info">VONTADE</td>
+                                    <td contenteditable="true"></td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <table class="table table-condensed table-hover text-center">
+                                    <thead>
+                                        <tr>
+                                            <td class="col-md-7"></td>
+                                            <td>Total</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="info">Bônus Base de Ataque</td>
+                                            <td>+11</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-hover text-center">
+                                    <thead>
+                                        <tr>
+                                            <td class="col-md-1"></td>
+                                            <td>Total</td>
+                                            <td>BBA</td>
+                                            <td>FOR</td>
+                                            <td>Outros</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="info">Agarrar</td>
+                                            <td contenteditable="true"></td>
+                                            <td>11</td>
+                                            <td contenteditable="true">4</td>
+                                            <td contenteditable="true"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-condensed table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Ataque</th>
+                                    <th class="col-md-2">Bônus de Ataque</th>
+                                    <th class="col-md-2">Dano</th>
+                                    <th class="col-md-1">Critico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                </tr>
 
+                                <tr>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                    <td contenteditable="true"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
