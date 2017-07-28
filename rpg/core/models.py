@@ -80,6 +80,9 @@ class Raca(db.Model):
     def __init__(self, nome=None):
         self.nome = nome
 
+    def __str__(self):
+        return self.nome
+
 
 class Classe(db.Model):
     __tablename__ = 'classe'
