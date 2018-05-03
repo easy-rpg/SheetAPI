@@ -27,6 +27,9 @@ class BBA(Model):
     QUALIDADE = Choices(('boa', ('BBA Boa')), ('ruim', ('BBA Ruim')))
     qualidade = CharField(choices=QUALIDADE, max_length=4)
 
+    class Meta:
+        unique_together = ('qualidade', 'nivel', 'valor')
+
     def __str__(self):
         return 'BBA {} nível {}'.format(self.qualidade, self.nivel)
 
