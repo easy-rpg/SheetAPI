@@ -1,0 +1,8 @@
+createdb rpg_sheet -O rodrigondec
+psql rpg_sheet
+    \password
+
+
+dropdb rpg_sheet
+
+sudo /etc/init.d/postgresql restart
