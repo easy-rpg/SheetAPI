@@ -87,7 +87,7 @@ class Pericia(Model):
 class Classe(PolymorphicModel):
     nome = CharField(max_length=20)
     slug = CharField(max_length=20, unique=True)
-    pericias_disponiveis = ManyToManyField(Pericia, related_name='+')
+    pericias = ManyToManyField(Pericia, related_name='+')
     quantidade_pericias_por_nivel = IntegerField(
         validators=[
             MinValueValidator(1)
@@ -105,8 +105,8 @@ class Classe(PolymorphicModel):
     def add_tendencia(self, tendencia):
         self.tendencias.append(tendencia)
 
-    def add_pericia_disponivel(self, pericia):
-        self.pericias_disponiveis.append(pericia)
+    def add_pericia(self, pericia):
+        self.pericias.append(pericia)
 
     def add_bba(self, bba):
         self.bbas.append(bba)

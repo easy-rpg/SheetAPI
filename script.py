@@ -10,8 +10,7 @@ from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, 
 
 for user in User.objects.all():
     print(user)
-
-del(user)
+    del(user)
 
 rodrigo = User(username='rodrigondec', email='rodrigondec@gmail.com',
                password='pbkdf2_sha256$100000$fQgW32ScWiVI$n3psZOWZvSqL8154DXXEBlRxpr1r57f6ANQSnF+qPU8=',
@@ -380,7 +379,7 @@ CLASSES = {
             TENDENCIAS['CeN']['instancia'],
             TENDENCIAS['CeM']['instancia']
         ],
-        'pericias_disponiveis': [
+        'pericias': [
             PERICIAS['adestrar_animais']['instancia'],
             PERICIAS['cavalgar']['instancia'],
             PERICIAS['escalar']['instancia'],
@@ -409,7 +408,7 @@ for nome, classe in CLASSES.items():
                            quantidade_pericias_por_nivel=classe['quantidade_pericias_por_nivel'])
         instancia.save()
         instancia.tendencias.set(classe['tendencias'])
-        instancia.pericias_disponiveis.set(classe['pericias_disponiveis'])
+        instancia.pericias.set(classe['pericias'])
         instancia.bbas.set(classe['bbas'])
         instancia.resistencias.set(classe['resistencias'])
 
