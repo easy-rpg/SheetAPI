@@ -279,3 +279,14 @@ for qualidade, bbas in BBAS.items():
             BBAS[qualidade][index]['instancia'] = BBA.objects.get(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
             print(e)
 
+PERICIAS = {
+
+}
+
+CLASSES = {
+
+}
+
+CLASSES_PRESTIGIO = {
+
+}
