@@ -72,8 +72,8 @@ class Resistencia(Model):
         return '{} {} nivel {}'.format(self.nome, self.qualidade, self.nivel)
 
 class Pericia(Model):
-    nome = CharField(max_length=24)
-    slug = CharField(max_length=24)
+    nome = CharField(max_length=37)
+    slug = CharField(max_length=37, unique=True)
     atributo = ForeignKey(Atributo, related_name='+', on_delete=PROTECT)
 
     def __str__(self):

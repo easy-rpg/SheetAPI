@@ -6,7 +6,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from core.models import Atributo, Resistencia, Tendencia, BBA
+from core.models import Atributo, Resistencia, Tendencia, BBA, Pericia
 
 users = User.objects.all()
 for user in users:
@@ -280,8 +280,73 @@ for qualidade, bbas in BBAS.items():
             print(e)
 
 PERICIAS = {
-
+    'abrir_fechaduras': {'nome': 'Abrir Fechaduras', 'slug': 'abrir_fechaduras', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'acrobacia': {'nome': 'Acrobacia', 'slug': 'acrobacia', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'adstrar_animais': {'nome': 'Adestrar Animais', 'slug': 'adestrar_animais', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'arte_da_fuga': {'nome': 'Arte da Fuga', 'slug': 'arte_da_fuga', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'atuacao_dramaturgia': {'nome': 'Atuação Dramaturgia', 'slug': 'atuacao_dramaturgia', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_humor': {'nome': 'Atuação Humor', 'slug': 'atuacao_humor', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_danca': {'nome': 'Atuação Dança', 'slug': 'atuacao_danca', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_oratoria': {'nome': 'Atuação Oratoria', 'slug': 'atuacao_oratoria', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_canto': {'nome': 'Atuação Canto', 'slug': 'atuacao_canto', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_instrumentos_de_percussao': {'nome': 'Atuação Intrumentos de Percussão', 'slug': 'atuacao_instrumentos_de_percussao', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_instrumentos_de_corda': {'nome': 'Atuação Intrumentos de Corda', 'slug': 'atuacaoinstrumentos_de_corda', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_instrumentos_de_sopro': {'nome': 'Atuação Intrumentos de Sopro', 'slug': 'atuacao_instrumentos_de_sopro', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'atuacao_instrumentos_de_teclado': {'nome': 'Atuação Intrumentos de Teclado', 'slug': 'atuacao_instrumentos_de_teclado', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'avaliacao': {'nome': 'Avaliação', 'slug': 'avaliacao', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'blefar': {'nome': 'Blefar', 'slug': 'blefar', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'cavalgar': {'nome': 'Cavalgar', 'slug': 'cavalgar', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'concentracao': {'nome': 'Concentração', 'slug': 'concentracao', 'atributo': ATRIBUTOS['constituicao']['instancia']},
+    'conhecimento_arcano': {'nome': 'Conhecimento Arcano', 'slug': 'conhecimento_arcano', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_arquitetura_e_engenharia': {'nome': 'Conhecimento Arquitetura e Engenharia', 'slug': 'conhecimento_arquitetura_e_engenharia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_masmorras': {'nome': 'Conhecimento Masmorras', 'slug': 'conhecimento_masmorras', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_geografia': {'nome': 'Conhecimento Geografia', 'slug': 'conhecimento_geografia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_historia': {'nome': 'Conhecimento História', 'slug': 'conhecimento_historia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_local': {'nome': 'Conhecimento Local', 'slug': 'conhecimento_local', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_natureza': {'nome': 'Conhecimento Natureza', 'slug': 'conhecimento_natureza', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_nobreza_e_realeza': {'nome': 'Conhecimento Nobreza e Realeza', 'slug': 'conhecimento_nobreza_e_realeza', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_religiao': {'nome': 'Conhecimento Religião', 'slug': 'conhecimento_religiao', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'conhecimento_planos': {'nome': 'Conhecimento Planos', 'slug': 'conhecimento_planos', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'cura': {'nome': 'Cura', 'slug': 'cura', 'atributo': ATRIBUTOS['sabedoria']['instancia']},
+    'decrifrar_escrita': {'nome': 'Decrifrar Escrita', 'slug': 'decrifrar_escrita', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'diplomacia': {'nome': 'Diplomacia', 'slug': 'diplomacia', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'disfarce': {'nome': 'Disfarce', 'slug': 'disfarce', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'equilibrio': {'nome': 'Equilibrio', 'slug': 'equilibrio', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'escalar': {'nome': 'Escalar', 'slug': 'escalar', 'atributo': ATRIBUTOS['forca']['instancia']},
+    'esconder_se': {'nome': 'Esconder-se', 'slug': 'esconder_se', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'falsificacao': {'nome': 'Falsificação', 'slug': 'falsificacao', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'furtividade': {'nome': 'Furtividade', 'slug': 'furtividade', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'identificar_magia': {'nome': 'Identificar Magia', 'slug': 'identificar_magia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'intimidar': {'nome': 'Intimidar', 'slug': 'intimidar', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'natacao': {'nome': 'Natação', 'slug': 'natacao', 'atributo': ATRIBUTOS['forca']['instancia']},
+    'observar': {'nome': 'Observar', 'slug': 'observar', 'atributo': ATRIBUTOS['sabedoria']['instancia']},
+    'obter_informacao': {'nome': 'Obter Informação', 'slug': 'obter_informacao', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'oficio_alquimia': {'nome': 'Ofício Alquimia', 'slug': 'oficio_alquimia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_armadilharia': {'nome': 'Ofício Armadilharia', 'slug': 'oficio_armadilharia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_armeiro': {'nome': 'Ofício Armeiro', 'slug': 'oficio_armeiro', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_armoraria': {'nome': 'Ofício Amoraria', 'slug': 'oficio_armoraria', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_arquearia': {'nome': 'Ofício Arquearia', 'slug': 'oficio_arquearia', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_escultura': {'nome': 'Ofício Escultura', 'slug': 'oficio_escultura', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'oficio_pintura': {'nome': 'Ofício Pintura', 'slug': 'oficio_pintura', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'operar_mecanismo': {'nome': 'Operar Mecanismo', 'slug': 'operar_mecanismo', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'ouvir': {'nome': 'Ouvir', 'slug': 'ouvir', 'atributo': ATRIBUTOS['sabedoria']['instancia']},
+    'procurar': {'nome': 'Procurar', 'slug': 'procurar', 'atributo': ATRIBUTOS['inteligencia']['instancia']},
+    'prestidigitacao': {'nome': 'Prestidigitação', 'slug': 'prestidigitacao', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'saltar': {'nome': 'Saltar', 'slug': 'saltar', 'atributo': ATRIBUTOS['forca']['instancia']},
+    'sentir_motivacao': {'nome': 'Sentir Motivação', 'slug': 'sentir_motivacao', 'atributo': ATRIBUTOS['sabedoria']['instancia']},
+    'sobrevivencia': {'nome': 'Sobrevivência', 'slug': 'sobrevivencia', 'atributo': ATRIBUTOS['sabedoria']['instancia']},
+    'usar_cordas': {'nome': 'Usar Cordas', 'slug': 'usar_cordas', 'atributo': ATRIBUTOS['destreza']['instancia']},
+    'usar_instrumento_magico': {'nome': 'Usar Instrumento Mágico', 'slug': 'usar_instrumento_magico', 'atributo': ATRIBUTOS['carisma']['instancia']}
 }
+
+for nome, pericia in PERICIAS.items():
+    try:
+        instancia = Pericia(nome=PERICIAS[nome]['nome'], slug=PERICIAS[nome]['slug'], atributo=PERICIAS[nome]['atributo'])
+        instancia.save()
+        PERICIAS[nome]['instancia'] = instancia
+    except IntegrityError as e:
+        PERICIAS[nome]['instancia'] = Pericia.objects.get(slug=PERICIAS[nome]['slug'])
+        print(e)
 
 CLASSES = {
 
