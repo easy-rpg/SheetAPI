@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from polymorphic.models import PolymorphicModel
 from model_utils import Choices
 
-# Create your models here.
+
 class Tendencia(Model):
     valor = CharField(max_length=16, unique=True)
     slug = CharField(max_length=3, unique=True)
@@ -11,7 +11,8 @@ class Tendencia(Model):
     def __str__(self):
         return self.valor
 
-class BBA(Model):
+
+class Bba(Model):
     nivel = IntegerField(
         validators=[
             MaxValueValidator(20),
@@ -33,6 +34,7 @@ class BBA(Model):
     def __str__(self):
         return 'BBA {} nível {}'.format(self.qualidade, self.nivel)
 
+
 class Atributo(Model):
     NOME = Choices(('Força'), ('Destreza'), ('Constituição'),
                       ('Inteligência'), ('Sabedoria'), ('Carisma'))
@@ -43,6 +45,7 @@ class Atributo(Model):
 
     def __str__(self):
         return self.nome
+
 
 class Resistencia(Model):
     nivel = IntegerField(
@@ -71,6 +74,7 @@ class Resistencia(Model):
     def __str__(self):
         return '{} {} nivel {}'.format(self.nome, self.qualidade, self.nivel)
 
+
 class Pericia(Model):
     nome = CharField(max_length=37)
     slug = CharField(max_length=37, unique=True)
@@ -82,19 +86,37 @@ class Pericia(Model):
 
 class Classe(PolymorphicModel):
     nome = CharField(max_length=20)
+    slug = CharField(max_length=20, unique=True)
     pericias_disponiveis = ManyToManyField(Pericia, related_name='+')
     quantidade_pericias_por_nivel = IntegerField(
         validators=[
             MinValueValidator(1)
         ]
     )
-    BBAs = ManyToManyField(BBA, related_name='+')
+    bbas = ManyToManyField(Bba, related_name='+')
+    resistencias = ManyToManyField(Resistencia, related_name='+')
     tendencias = ManyToManyField(Tendencia, related_name='+')
     DV = Choices((4, ('d4')), (6, ('d6')),(8, ('d8')), (10, ('d10')), (12, ('d12')))
     dv = IntegerField(choices=DV)
     CONJURADOR = Choices(('div', ('Divino')), ('arc', ('Arcano')), ('nan', ('Não conjurador')))
     conjurador = CharField(choices=CONJURADOR, default=CONJURADOR.nan, max_length=3)
     # conjurador_completo = BooleanField(default=True)
+
+    def add_tendencia(self, tendencia):
+        self.tendencias.append(tendencia)
+
+    def add_pericia_disponivel(self, pericia):
+        self.pericias_disponiveis.append(pericia)
+
+    def add_bba(self, bba):
+        self.bbas.append(bba)
+
+    def add_resistencia(self, resistencia):
+        self.resistencias.append(resistencia)
+
+    def __str__(self):
+        return self.nome
+
 
 class ClassePrestigio(Classe):
     pass

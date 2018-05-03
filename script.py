@@ -6,11 +6,12 @@ django.setup()
 
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from core.models import Atributo, Resistencia, Tendencia, BBA, Pericia
+from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio
 
-users = User.objects.all()
-for user in users:
+for user in User.objects.all():
     print(user)
+
+del(user)
 
 rodrigo = User(username='rodrigondec', email='rodrigondec@gmail.com',
                password='pbkdf2_sha256$100000$fQgW32ScWiVI$n3psZOWZvSqL8154DXXEBlRxpr1r57f6ANQSnF+qPU8=',
@@ -20,7 +21,6 @@ try:
 except IntegrityError as e:
     rodrigo = User.objects.get(username='rodrigondec')
     print(e)
-
 
 ATRIBUTOS = {
     'forca': {'nome': 'Força', 'slug': 'for'},
@@ -40,6 +40,8 @@ for nome, atributo in ATRIBUTOS.items():
         ATRIBUTOS[nome]['instancia'] = Atributo.objects.get(slug=atributo['slug'])
         print(e)
 
+del(nome)
+del(atributo)
 
 RESISTENCIAS = {
     'fortitude': {'nome': 'Fortitude', 'slug': 'fort', 'atributo': ATRIBUTOS['constituicao']['instancia'], 'qualidades': {
@@ -199,6 +201,11 @@ for nome_resistencia, resistencia in RESISTENCIAS.items():
                                                                                                                            valor=qualidade[index]['valor'])
                 print(e)
 
+del(nome_resistencia)
+del(nome_qualidade)
+del(qualidade)
+del(resistencia)
+del(index)
 
 TENDENCIAS = {
     'LeB': {'valor': 'Leal e Bom', 'slug': 'LeB'},
@@ -220,6 +227,9 @@ for nome, tendencia in TENDENCIAS.items():
     except IntegrityError as e:
         TENDENCIAS[nome]['instancia'] = Tendencia.objects.get(slug=TENDENCIAS[nome]['slug'])
         print(e)
+
+del(nome)
+del(tendencia)
 
 BBAS = {
     'boa': [
@@ -272,17 +282,21 @@ for qualidade, bbas in BBAS.items():
     for index in range(0, len(bbas)):
 
         try:
-            instancia = BBA(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
+            instancia = Bba(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
             instancia.save()
             BBAS[qualidade][index]['instancia'] = instancia
         except IntegrityError as e:
-            BBAS[qualidade][index]['instancia'] = BBA.objects.get(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
+            BBAS[qualidade][index]['instancia'] = Bba.objects.get(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
             print(e)
+
+del(qualidade)
+del(bbas)
+del(index)
 
 PERICIAS = {
     'abrir_fechaduras': {'nome': 'Abrir Fechaduras', 'slug': 'abrir_fechaduras', 'atributo': ATRIBUTOS['destreza']['instancia']},
     'acrobacia': {'nome': 'Acrobacia', 'slug': 'acrobacia', 'atributo': ATRIBUTOS['destreza']['instancia']},
-    'adstrar_animais': {'nome': 'Adestrar Animais', 'slug': 'adestrar_animais', 'atributo': ATRIBUTOS['carisma']['instancia']},
+    'adestrar_animais': {'nome': 'Adestrar Animais', 'slug': 'adestrar_animais', 'atributo': ATRIBUTOS['carisma']['instancia']},
     'arte_da_fuga': {'nome': 'Arte da Fuga', 'slug': 'arte_da_fuga', 'atributo': ATRIBUTOS['destreza']['instancia']},
     'atuacao_dramaturgia': {'nome': 'Atuação Dramaturgia', 'slug': 'atuacao_dramaturgia', 'atributo': ATRIBUTOS['carisma']['instancia']},
     'atuacao_humor': {'nome': 'Atuação Humor', 'slug': 'atuacao_humor', 'atributo': ATRIBUTOS['carisma']['instancia']},
@@ -348,9 +362,66 @@ for nome, pericia in PERICIAS.items():
         PERICIAS[nome]['instancia'] = Pericia.objects.get(slug=PERICIAS[nome]['slug'])
         print(e)
 
-CLASSES = {
+del(nome)
+del(pericia)
 
+CLASSES = {
+    'barbaro': {
+        'nome': 'Bárbaro',
+        'slug': 'barbaro',
+        'dv': 12,
+        'quantidade_pericias_por_nivel': 4,
+        'conjurador': 'nan',
+        'tendencias': [
+            TENDENCIAS['NeB']['instancia'],
+            TENDENCIAS['N']['instancia'],
+            TENDENCIAS['NeM']['instancia'],
+            TENDENCIAS['CeB']['instancia'],
+            TENDENCIAS['CeN']['instancia'],
+            TENDENCIAS['CeM']['instancia']
+        ],
+        'pericias_disponiveis': [
+            PERICIAS['adestrar_animais']['instancia'],
+            PERICIAS['cavalgar']['instancia'],
+            PERICIAS['escalar']['instancia'],
+            PERICIAS['intimidar']['instancia'],
+            PERICIAS['natacao']['instancia'],
+            PERICIAS['oficio_armadilharia']['instancia'],
+            PERICIAS['oficio_armoraria']['instancia'],
+            PERICIAS['oficio_arquearia']['instancia'],
+            PERICIAS['oficio_armeiro']['instancia'],
+            PERICIAS['oficio_escultura']['instancia'],
+            PERICIAS['oficio_pintura']['instancia'],
+            PERICIAS['ouvir']['instancia'],
+            PERICIAS['saltar']['instancia'],
+            PERICIAS['sobrevivencia']['instancia']
+        ],
+        'bbas': Bba.objects.filter(qualidade='boa'),
+        'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
+            Resistencia.objects.filter(slug='ref',qualidade='ruim') |
+            Resistencia.objects.filter(slug='von',qualidade='ruim')
+    }
 }
+
+for nome, classe in CLASSES.items():
+    try:
+        instancia = Classe(nome=classe['nome'], slug=classe['slug'], dv=classe['dv'], conjurador=classe['conjurador'],
+                           quantidade_pericias_por_nivel=classe['quantidade_pericias_por_nivel'])
+        instancia.save()
+        instancia.tendencias.set(classe['tendencias'])
+        instancia.pericias_disponiveis.set(classe['pericias_disponiveis'])
+        instancia.bbas.set(classe['bbas'])
+        instancia.resistencias.set(classe['resistencias'])
+
+        instancia.save()
+        CLASSES[nome]['instancia'] = instancia
+    except IntegrityError as e:
+        CLASSES[nome]['instancia'] = Classe.objects.get(slug=classe['slug'])
+        print(e)
+
+del(nome)
+del(classe)
+del(instancia)
 
 CLASSES_PRESTIGIO = {
 
