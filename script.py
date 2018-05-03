@@ -7,19 +7,28 @@ django.setup()
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio
+from usuario.models import Usuario
 
 for user in User.objects.all():
     print(user)
     del(user)
 
-rodrigo = User(username='rodrigondec', email='rodrigondec@gmail.com',
+rodrigo_user = User(username='rodrigondec', email='rodrigondec@gmail.com',
                password='pbkdf2_sha256$100000$fQgW32ScWiVI$n3psZOWZvSqL8154DXXEBlRxpr1r57f6ANQSnF+qPU8=',
                is_staff=True, is_superuser=True)
 try:
+    rodrigo_user.save()
+except IntegrityError as e:
+    rodrigo_user = User.objects.get(username='rodrigondec')
+    print(e)
+
+rodrigo = Usuario(perfil_user=rodrigo_user)
+try:
     rodrigo.save()
 except IntegrityError as e:
-    rodrigo = User.objects.get(username='rodrigondec')
+    rodrigo = Usuario.objects.get(perfil_user=rodrigo_user)
     print(e)
+
 
 ATRIBUTOS = {
     'forca': {'nome': 'Força', 'slug': 'for'},
