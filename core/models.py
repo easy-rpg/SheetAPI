@@ -1,4 +1,4 @@
-from django.db.models import Model, BooleanField, CharField, IntegerField, ManyToManyField, OneToOneField, ForeignKey, PROTECT
+from django.db.models import Model, CharField, IntegerField, ManyToManyField, ForeignKey, PROTECT
 from django.core.validators import MaxValueValidator, MinValueValidator
 from polymorphic.models import PolymorphicModel
 from model_utils import Choices
@@ -37,10 +37,10 @@ class Bba(Model):
 
 class Atributo(Model):
     NOME = Choices(('Força'), ('Destreza'), ('Constituição'),
-                      ('Inteligência'), ('Sabedoria'), ('Carisma'))
+                   ('Inteligência'), ('Sabedoria'), ('Carisma'))
     nome = CharField(choices=NOME, max_length=12, unique=True)
     SLUG = Choices(('for'), ('des'), ('con'),
-                      ('int'), ('sab'), ('car'))
+                   ('int'), ('sab'), ('car'))
     slug = CharField(choices=SLUG, max_length=3, unique=True)
 
     def __str__(self):
@@ -60,7 +60,7 @@ class Resistencia(Model):
             MinValueValidator(0)
         ]
     )
-    NOME =Choices(('Fortitude'), ('Reflexo'), ('Vontade'))
+    NOME = Choices(('Fortitude'), ('Reflexo'), ('Vontade'))
     nome = CharField(choices=NOME, max_length=9)
     SLUG = Choices(('fort'), ('ref'), ('von'))
     slug = CharField(choices=SLUG, max_length=4)
@@ -96,10 +96,11 @@ class Classe(PolymorphicModel):
     bbas = ManyToManyField(Bba, related_name='+')
     resistencias = ManyToManyField(Resistencia, related_name='+')
     tendencias = ManyToManyField(Tendencia, related_name='+')
-    DV = Choices((4, ('d4')), (6, ('d6')),(8, ('d8')), (10, ('d10')), (12, ('d12')))
+    DV = Choices((4, ('d4')), (6, ('d6')), (8, ('d8')), (10, ('d10')), (12, ('d12')))
     dv = IntegerField(choices=DV)
     CONJURADOR = Choices(('div', ('Divino')), ('arc', ('Arcano')), ('nan', ('Não conjurador')))
     conjurador = CharField(choices=CONJURADOR, default=CONJURADOR.nan, max_length=3)
+
     # conjurador_completo = BooleanField(default=True)
 
     def add_tendencia(self, tendencia):
