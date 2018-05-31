@@ -59,6 +59,5 @@ target/
 
 # PyCharm
 .idea/
-migrations/
 
 SheetAPI/config\.py
