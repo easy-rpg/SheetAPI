@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Tendencia, Bba, Atributo, Resistencia, Pericia, Classe, ClassePrestigio
 
-# Register your models here.
+
 admin.site.register(Tendencia)
 admin.site.register(Bba)
 admin.site.register(Atributo)

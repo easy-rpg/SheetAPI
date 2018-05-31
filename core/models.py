@@ -121,3 +121,15 @@ class Classe(PolymorphicModel):
 
 class ClassePrestigio(Classe):
     pass
+
+
+class Raca(Model):
+    nome = CharField()
+
+
+class Subtipo(Model):
+    nome = CharField()
+
+
+class Modelo(Model):
+    nome = CharField()
