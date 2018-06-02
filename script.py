@@ -6,7 +6,8 @@ django.setup()
 
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio, Raca, Subtipo, Modelo
+from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio, Raca, Tipo, Modelo
+from campanha.models import Campanha, Arco
 
 for user in User.objects.all():
     print(user)
@@ -552,3 +553,17 @@ for nome, modelo in MODELOS.items():
     except IntegrityError as e:
         MODELOS[nome]['instancia'] = Modelo.objects.get(slug=modelo['slug'])
         # print(e)
+
+campanha = Campanha(nome='Campanha do Filé', mestre=rodrigo.perfil)
+try:
+    campanha.save()
+except IntegrityError as e:
+    campanha = Campanha.objects.get(nome='Campanha do Filé')
+    print(e)
+
+arco = Arco(nome='principal', campanha=campanha)
+try:
+    arco.save()
+except IntegrityError as e:
+    arco = Arco.objects.get(nome='principal')
+    print(e)

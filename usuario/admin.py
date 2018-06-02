@@ -14,4 +14,5 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+# admin.site.register(PerfilUsuario)
 
