@@ -6,7 +6,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio
+from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio, Raca, Subtipo, Modelo
 
 for user in User.objects.all():
     print(user)
@@ -19,7 +19,7 @@ try:
     rodrigo.save()
 except IntegrityError as e:
     rodrigo = User.objects.get(username='rodrigondec')
-    print(e)
+    # print(e)
 
 
 ATRIBUTOS = {
@@ -38,7 +38,7 @@ for nome, atributo in ATRIBUTOS.items():
         ATRIBUTOS[nome]['instancia'] = instancia
     except IntegrityError as e:
         ATRIBUTOS[nome]['instancia'] = Atributo.objects.get(slug=atributo['slug'])
-        print(e)
+        # print(e)
 
 del(nome)
 del(atributo)
@@ -199,7 +199,7 @@ for nome_resistencia, resistencia in RESISTENCIAS.items():
                                                                                                                            qualidade=nome_qualidade,
                                                                                                                            nivel=qualidade[index]['nivel'],
                                                                                                                            valor=qualidade[index]['valor'])
-                print(e)
+                # print(e)
 
 del(nome_resistencia)
 del(nome_qualidade)
@@ -226,7 +226,7 @@ for nome, tendencia in TENDENCIAS.items():
         TENDENCIAS[nome]['instancia'] = instancia
     except IntegrityError as e:
         TENDENCIAS[nome]['instancia'] = Tendencia.objects.get(slug=TENDENCIAS[nome]['slug'])
-        print(e)
+        # print(e)
 
 del(nome)
 del(tendencia)
@@ -287,7 +287,7 @@ for qualidade, bbas in BBAS.items():
             BBAS[qualidade][index]['instancia'] = instancia
         except IntegrityError as e:
             BBAS[qualidade][index]['instancia'] = Bba.objects.get(qualidade=qualidade, nivel=bbas[index]['nivel'], valor=bbas[index]['valor'])
-            print(e)
+            # print(e)
 
 del(qualidade)
 del(bbas)
@@ -360,7 +360,7 @@ for nome, pericia in PERICIAS.items():
         PERICIAS[nome]['instancia'] = instancia
     except IntegrityError as e:
         PERICIAS[nome]['instancia'] = Pericia.objects.get(slug=PERICIAS[nome]['slug'])
-        print(e)
+        # print(e)
 
 del(nome)
 del(pericia)
@@ -417,12 +417,110 @@ for nome, classe in CLASSES.items():
         CLASSES[nome]['instancia'] = instancia
     except IntegrityError as e:
         CLASSES[nome]['instancia'] = Classe.objects.get(slug=classe['slug'])
-        print(e)
+        # print(e)
 
 del(nome)
 del(classe)
 del(instancia)
 
 CLASSES_PRESTIGIO = {
-
+    'barbaro_frenetico': {
+            'nome': 'Bárbaro Frenético',
+            'slug': 'barbaro_frenetico',
+            'dv': 12,
+            'quantidade_pericias_por_nivel': 4,
+            'conjurador': 'nan',
+            'tendencias': [
+                TENDENCIAS['NeB']['instancia'],
+                TENDENCIAS['N']['instancia'],
+                TENDENCIAS['NeM']['instancia'],
+                TENDENCIAS['CeB']['instancia'],
+                TENDENCIAS['CeN']['instancia'],
+                TENDENCIAS['CeM']['instancia']
+            ],
+            'pericias': [
+                PERICIAS['adestrar_animais']['instancia'],
+                PERICIAS['cavalgar']['instancia'],
+                PERICIAS['escalar']['instancia'],
+                PERICIAS['intimidar']['instancia'],
+                PERICIAS['natacao']['instancia'],
+                PERICIAS['oficio_armadilharia']['instancia'],
+                PERICIAS['oficio_armoraria']['instancia'],
+                PERICIAS['oficio_arquearia']['instancia'],
+                PERICIAS['oficio_armeiro']['instancia'],
+                PERICIAS['oficio_escultura']['instancia'],
+                PERICIAS['oficio_pintura']['instancia'],
+                PERICIAS['ouvir']['instancia'],
+                PERICIAS['saltar']['instancia'],
+                PERICIAS['sobrevivencia']['instancia']
+            ],
+            'bbas': Bba.objects.filter(qualidade='boa'),
+            'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
+                Resistencia.objects.filter(slug='ref',qualidade='ruim') |
+                Resistencia.objects.filter(slug='von',qualidade='ruim')
+        }
 }
+
+for nome, classe in CLASSES_PRESTIGIO.items():
+    try:
+        instancia = ClassePrestigio(nome=classe['nome'], slug=classe['slug'], dv=classe['dv'], conjurador=classe['conjurador'],
+                           quantidade_pericias_por_nivel=classe['quantidade_pericias_por_nivel'])
+        instancia.save()
+        instancia.tendencias.set(classe['tendencias'])
+        instancia.pericias.set(classe['pericias'])
+        instancia.bbas.set(classe['bbas'])
+        instancia.resistencias.set(classe['resistencias'])
+
+        instancia.save()
+        CLASSES_PRESTIGIO[nome]['instancia'] = instancia
+    except IntegrityError as e:
+        CLASSES_PRESTIGIO[nome]['instancia'] = ClassePrestigio.objects.get(slug=classe['slug'])
+        # print(e)
+
+RACAS = {
+    'humano': {
+        'nome': 'Humano',
+        'slug': 'humano'
+    },
+    'anao': {
+        'nome': 'Anão',
+        'slug': 'anao'
+    },
+    'elfo': {
+        'nome': 'Elfo',
+        'slug': 'elfo'
+    },
+    'meio_elfo': {
+        'nome': 'Meio-Elfo',
+        'slug': 'meio_elfo'
+    },
+    'halfling': {
+        'nome': 'Halfling',
+        'slug': 'halfling'
+    },
+    'orc': {
+        'nome': 'Orc',
+        'slug': 'orc'
+    },
+    'meio_orc': {
+        'nome': 'Meio-Orc',
+        'slug': 'meio_orc'
+    },
+    'gnomo': {
+        'nome': 'Gnomo',
+        'slug': 'gnomo'
+    },
+    'pixie': {
+        'nome': 'Pixie',
+        'slug': 'pixie'
+    },
+}
+
+for nome, raca in RACAS.items():
+    try:
+        instancia = Raca(nome=raca['nome'], slug=raca['slug'])
+        instancia.save()
+        RACAS[nome]['instancia'] = instancia
+    except IntegrityError as e:
+        RACAS[nome]['instancia'] = Raca.objects.get(slug=raca['slug'])
+        # print(e)
