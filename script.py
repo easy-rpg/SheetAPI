@@ -524,3 +524,31 @@ for nome, raca in RACAS.items():
     except IntegrityError as e:
         RACAS[nome]['instancia'] = Raca.objects.get(slug=raca['slug'])
         # print(e)
+
+MODELOS = {
+    'meio_abissal': {
+        'nome': 'Meio-abissal',
+        'slug': 'meio_abissal'
+    },
+    'meio_dragao': {
+        'nome': 'Meio-dragão',
+        'slug': 'meio_dragao'
+    },
+    'homem_urso_negro': {
+        'nome': 'Homen-urso Negro',
+        'slug': 'homen_urso_negro'
+    },
+    'vampiro': {
+        'nome': 'Vampiro',
+        'slug': 'vampiro'
+    }
+}
+
+for nome, modelo in MODELOS.items():
+    try:
+        instancia = Modelo(nome=modelo['nome'], slug=modelo['slug'])
+        instancia.save()
+        MODELOS[nome]['instancia'] = instancia
+    except IntegrityError as e:
+        MODELOS[nome]['instancia'] = Modelo.objects.get(slug=modelo['slug'])
+        # print(e)
