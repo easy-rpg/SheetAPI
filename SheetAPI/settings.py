@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'usuario.apps.UsuarioConfig',
     'campanha.apps.CampanhaConfig',
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [
