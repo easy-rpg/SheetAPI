@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Campanha, Arco
 
-# Register your models here.
+
+admin.site.register(Campanha)
+admin.site.register(Arco)
