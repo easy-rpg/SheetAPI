@@ -3,10 +3,10 @@ from usuario.models import PerfilUsuario
 
 
 class Campanha(Model):
-    nome = CharField()
-    mestre = ForeignKey(PerfilUsuario, on_delete=SET_NULL, related_name='campanhas')
+    nome = CharField(max_length=30)
+    mestre = ForeignKey(PerfilUsuario, on_delete=SET_NULL, null=True, related_name='campanhas')
 
 
 class Arco(Model):
-    nome = CharField()
+    nome = CharField(max_length=30)
     campanha = ForeignKey(Campanha, on_delete=CASCADE, related_name='arcos')

@@ -124,12 +124,22 @@ class ClassePrestigio(Classe):
 
 
 class Raca(Model):
-    nome = CharField()
+    nome = CharField(max_length=14)
+    slug = CharField(max_length=14, unique=True)
 
+    def __str__(self):
+        return self.nome
 
 class Subtipo(Model):
-    nome = CharField()
+    nome = CharField(max_length=14)
+    slug = CharField(max_length=14, unique=True)
 
+    def __str__(self):
+        return self.nome
 
 class Modelo(Model):
-    nome = CharField()
+    nome = CharField(max_length=14)
+    slug = CharField(max_length=14, unique=True)
+
+    def __str__(self):
+        return self.nome
