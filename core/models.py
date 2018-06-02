@@ -123,6 +123,14 @@ class ClassePrestigio(Classe):
     pass
 
 
+class Tipo(Model):
+    nome = CharField(max_length=14)
+    slug = CharField(max_length=14, unique=True)
+
+    def __str__(self):
+        return self.nome
+
+
 class Raca(Model):
     nome = CharField(max_length=14)
     slug = CharField(max_length=14, unique=True)
@@ -130,16 +138,10 @@ class Raca(Model):
     def __str__(self):
         return self.nome
 
-class Subtipo(Model):
-    nome = CharField(max_length=14)
-    slug = CharField(max_length=14, unique=True)
-
-    def __str__(self):
-        return self.nome
 
 class Modelo(Model):
-    nome = CharField(max_length=14)
-    slug = CharField(max_length=14, unique=True)
+    nome = CharField(max_length=20)
+    slug = CharField(max_length=20, unique=True)
 
     def __str__(self):
         return self.nome

@@ -4,7 +4,7 @@ from django.db.models import Model, OneToOneField, ForeignKey, ManyToManyField, 
 from model_utils import Choices
 from usuario.models import PerfilUsuario
 from campanha.models import Arco
-from core.models import Tendencia, Raca, Classe, Subtipo, Modelo
+from core.models import Tendencia, Raca, Classe, Modelo
 from .utils import get_personagem_upload_path
 
 
@@ -12,8 +12,7 @@ class Ficha(Model):
     tendencia = ForeignKey(Tendencia, on_delete=PROTECT, related_name='+')
     raca = ForeignKey(Raca, on_delete=PROTECT, related_name='+')
     classes = ManyToManyField(Classe)
-    sub_tipo = ForeignKey(Subtipo, on_delete=PROTECT, related_name='+')
-    modelo = ForeignKey(Modelo, on_delete=PROTECT, related_name='+')
+    modelos = ManyToManyField(Modelo)
 
 
 class Personagem(Model):
