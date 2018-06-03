@@ -635,11 +635,26 @@ try:
     campanha.save()
 except IntegrityError as e:
     campanha = Campanha.objects.get(nome='Campanha do Filé')
-    print(e)
+    # print(e)
 
 arco = Arco(nome='principal', campanha=campanha)
 try:
     arco.save()
 except IntegrityError as e:
     arco = Arco.objects.get(nome='principal')
+    # print(e)
+
+hieriling = Personagem(usuario=rodrigo.perfil, nome='Hieriling',
+                       tamanho='me', sexo='m', arco=arco,
+                       tendencia=TENDENCIAS['LeN']['instancia'], raca=RACAS['anao']['instancia'])
+try:
+    hieriling.save()
+except IntegrityError as e:
+    hieriling = Personagem.objects.get(usuario=rodrigo.perfil, nome='Hieriling')
+    print(e)
+
+try:
+    PersonagemClasse(personagem=hieriling, classe=CLASSES['clerigo']['instancia'], nivel=10).save()
+    PersonagemClasse(personagem=hieriling, classe=CLASSES_PRESTIGIO['devoto_da_guerra']['instancia'], nivel=10).save()
+except IntegrityError as e:
     print(e)
