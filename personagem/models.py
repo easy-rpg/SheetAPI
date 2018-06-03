@@ -37,3 +37,20 @@ class Personagem(Model):
     )
     modelos = ManyToManyField(Modelo, blank=True)
 
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        unique_together = ('usuario', 'nome')
+
+
+class PersonagemClasse(Model):
+    personagem = ForeignKey(Personagem, on_delete=CASCADE)
+    classe = ForeignKey(Classe, on_delete=PROTECT)
+    nivel = IntegerField()
+
+    def __str__(self):
+        return '{} | {}'.format(self.personagem, self.classe)
+
+    class Meta:
+        unique_together = ('personagem', 'classe')
