@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, ClassePrestigio, Raca, Tipo, Modelo
 from campanha.models import Campanha, Arco
+from personagem.models import Personagem, PersonagemClasse
 
 for user in User.objects.all():
     print(user)
@@ -401,6 +402,43 @@ CLASSES = {
         'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
             Resistencia.objects.filter(slug='ref',qualidade='ruim') |
             Resistencia.objects.filter(slug='von',qualidade='ruim')
+    },
+    'clerigo': {
+        'nome': 'Clérigo',
+        'slug': 'clerigo',
+        'dv': 8,
+        'quantidade_pericias_por_nivel': 2,
+        'conjurador': 'div',
+        'tendencias': [
+            TENDENCIAS['LeB']['instancia'],
+            TENDENCIAS['LeN']['instancia'],
+            TENDENCIAS['LeM']['instancia'],
+            TENDENCIAS['NeB']['instancia'],
+            TENDENCIAS['N']['instancia'],
+            TENDENCIAS['NeM']['instancia'],
+            TENDENCIAS['CeB']['instancia'],
+            TENDENCIAS['CeN']['instancia'],
+            TENDENCIAS['CeM']['instancia']
+        ],
+        'pericias': [
+            PERICIAS['concentracao']['instancia'],
+            PERICIAS['conhecimento_arcano']['instancia'],
+            PERICIAS['conhecimento_historia']['instancia'],
+            PERICIAS['conhecimento_planos']['instancia'],
+            PERICIAS['conhecimento_religiao']['instancia'],
+            PERICIAS['cura']['instancia'],
+            PERICIAS['diplomacia']['instancia'],
+            PERICIAS['oficio_armadilharia']['instancia'],
+            PERICIAS['oficio_armoraria']['instancia'],
+            PERICIAS['oficio_arquearia']['instancia'],
+            PERICIAS['oficio_armeiro']['instancia'],
+            PERICIAS['oficio_escultura']['instancia'],
+            PERICIAS['oficio_pintura']['instancia']
+        ],
+        'bbas': Bba.objects.filter(qualidade='ruim'),
+        'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
+            Resistencia.objects.filter(slug='ref',qualidade='ruim') |
+            Resistencia.objects.filter(slug='von',qualidade='boa')
     }
 }
 
@@ -426,40 +464,78 @@ del(instancia)
 
 CLASSES_PRESTIGIO = {
     'barbaro_frenetico': {
-            'nome': 'Bárbaro Frenético',
-            'slug': 'barbaro_frenetico',
-            'dv': 12,
-            'quantidade_pericias_por_nivel': 4,
-            'conjurador': 'nan',
-            'tendencias': [
-                TENDENCIAS['NeB']['instancia'],
-                TENDENCIAS['N']['instancia'],
-                TENDENCIAS['NeM']['instancia'],
-                TENDENCIAS['CeB']['instancia'],
-                TENDENCIAS['CeN']['instancia'],
-                TENDENCIAS['CeM']['instancia']
-            ],
-            'pericias': [
-                PERICIAS['adestrar_animais']['instancia'],
-                PERICIAS['cavalgar']['instancia'],
-                PERICIAS['escalar']['instancia'],
-                PERICIAS['intimidar']['instancia'],
-                PERICIAS['natacao']['instancia'],
-                PERICIAS['oficio_armadilharia']['instancia'],
-                PERICIAS['oficio_armoraria']['instancia'],
-                PERICIAS['oficio_arquearia']['instancia'],
-                PERICIAS['oficio_armeiro']['instancia'],
-                PERICIAS['oficio_escultura']['instancia'],
-                PERICIAS['oficio_pintura']['instancia'],
-                PERICIAS['ouvir']['instancia'],
-                PERICIAS['saltar']['instancia'],
-                PERICIAS['sobrevivencia']['instancia']
-            ],
-            'bbas': Bba.objects.filter(qualidade='boa'),
-            'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
-                Resistencia.objects.filter(slug='ref',qualidade='ruim') |
-                Resistencia.objects.filter(slug='von',qualidade='ruim')
-        }
+        'nome': 'Bárbaro Frenético',
+        'slug': 'barbaro_frenetico',
+        'dv': 12,
+        'quantidade_pericias_por_nivel': 4,
+        'conjurador': 'nan',
+        'tendencias': [
+            TENDENCIAS['NeB']['instancia'],
+            TENDENCIAS['N']['instancia'],
+            TENDENCIAS['NeM']['instancia'],
+            TENDENCIAS['CeB']['instancia'],
+            TENDENCIAS['CeN']['instancia'],
+            TENDENCIAS['CeM']['instancia']
+        ],
+        'pericias': [
+            PERICIAS['adestrar_animais']['instancia'],
+            PERICIAS['cavalgar']['instancia'],
+            PERICIAS['escalar']['instancia'],
+            PERICIAS['intimidar']['instancia'],
+            PERICIAS['natacao']['instancia'],
+            PERICIAS['oficio_armadilharia']['instancia'],
+            PERICIAS['oficio_armoraria']['instancia'],
+            PERICIAS['oficio_arquearia']['instancia'],
+            PERICIAS['oficio_armeiro']['instancia'],
+            PERICIAS['oficio_escultura']['instancia'],
+            PERICIAS['oficio_pintura']['instancia'],
+            PERICIAS['ouvir']['instancia'],
+            PERICIAS['saltar']['instancia'],
+            PERICIAS['sobrevivencia']['instancia']
+        ],
+        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 10)),
+        'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
+            Resistencia.objects.filter(slug='ref',qualidade='ruim') |
+            Resistencia.objects.filter(slug='von',qualidade='ruim')
+    },
+    'devoto_da_guerra': {
+        'nome': 'Devoto da Guerra',
+        'slug': 'devoto_da_guerra',
+        'dv': 10,
+        'quantidade_pericias_por_nivel': 2,
+        'conjurador': 'div',
+        'tendencias': [
+            TENDENCIAS['LeB']['instancia'],
+            TENDENCIAS['LeN']['instancia'],
+            TENDENCIAS['LeM']['instancia'],
+            TENDENCIAS['NeB']['instancia'],
+            TENDENCIAS['N']['instancia'],
+            TENDENCIAS['NeM']['instancia'],
+            TENDENCIAS['CeB']['instancia'],
+            TENDENCIAS['CeN']['instancia'],
+            TENDENCIAS['CeM']['instancia']
+        ],
+        'pericias': [
+            PERICIAS['adestrar_animais']['instancia'],
+            PERICIAS['cavalgar']['instancia'],
+            PERICIAS['escalar']['instancia'],
+            PERICIAS['intimidar']['instancia'],
+            PERICIAS['natacao']['instancia'],
+            PERICIAS['oficio_armadilharia']['instancia'],
+            PERICIAS['oficio_armoraria']['instancia'],
+            PERICIAS['oficio_arquearia']['instancia'],
+            PERICIAS['oficio_armeiro']['instancia'],
+            PERICIAS['oficio_escultura']['instancia'],
+            PERICIAS['oficio_pintura']['instancia'],
+            PERICIAS['ouvir']['instancia'],
+            PERICIAS['saltar']['instancia'],
+            PERICIAS['sobrevivencia']['instancia']
+        ],
+        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 10)),
+        'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
+            Resistencia.objects.filter(slug='ref',qualidade='ruim') |
+            Resistencia.objects.filter(slug='von',qualidade='ruim')
+    }
 }
 
 for nome, classe in CLASSES_PRESTIGIO.items():
