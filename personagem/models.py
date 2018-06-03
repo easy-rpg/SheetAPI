@@ -8,16 +8,8 @@ from core.models import Tendencia, Raca, Classe, Modelo
 from .utils import get_personagem_upload_path
 
 
-class Ficha(Model):
-    tendencia = ForeignKey(Tendencia, on_delete=PROTECT, related_name='+')
-    raca = ForeignKey(Raca, on_delete=PROTECT, related_name='+')
-    classes = ManyToManyField(Classe)
-    modelos = ManyToManyField(Modelo)
-
-
 class Personagem(Model):
     usuario = ForeignKey(PerfilUsuario, on_delete=CASCADE)
-    ficha = OneToOneField(Ficha, on_delete=CASCADE, related_name='+')
     arco = ForeignKey(Arco, on_delete=SET_NULL, null=True, related_name='personagens')
     nome = CharField(max_length=30, null=True, blank=True)
     foto = ImageField(upload_to=get_personagem_upload_path, null=True, blank=True)
@@ -33,6 +25,15 @@ class Personagem(Model):
     TAMANHO = Choices(('mi', ('Minúsculo')), ('di', ('Diminuto')), ('mu', ('Miúdo')),
                       ('pe', ('Pequeno')), ('me', ('Médio')), ('gr', ('Grande')),
                       ('en', ('Enorme')), ('im', ('Imenso')), ('co', ('Colossal')))
-    tamanho = CharField(choices=SEXO, max_length=2)
+    tamanho = CharField(choices=TAMANHO, max_length=2)
 
     lore = TextField(null=True, blank=True)
+
+    tendencia = ForeignKey(Tendencia, on_delete=PROTECT, related_name='+')
+    raca = ForeignKey(Raca, on_delete=PROTECT, related_name='+')
+    classes = ManyToManyField(
+        Classe,
+        through='PersonagemClasse'
+    )
+    modelos = ManyToManyField(Modelo, blank=True)
+
