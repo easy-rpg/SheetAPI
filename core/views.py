@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Classe
-from .serializers import ClasseSerializer
+from .serializers import ClassePolymorphicSerializer
 
 
 class ClasseViewset(ModelViewSet):
@@ -11,5 +11,5 @@ class ClasseViewset(ModelViewSet):
         Retorna todas as classes
     """
     queryset = Classe.objects.all()
-    serializer_class = ClasseSerializer
+    serializer_class = ClassePolymorphicSerializer
     http_method_names = ['get']
