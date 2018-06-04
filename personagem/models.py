@@ -33,24 +33,40 @@ class Personagem(Model):
     raca = ForeignKey(Raca, on_delete=PROTECT, related_name='+')
     classes = ManyToManyField(
         Classe,
-        through='PersonagemClasse'
+        through='PersonagemClasse',
+        related_name='+'
     )
     modelos = ManyToManyField(Modelo, blank=True)
 
     def __str__(self):
         return self.nome
 
+    @property
+    def bba(self):
+        print('getting bba')
+        bba_atual = 0
+        print('bba_atual: {}'.format(bba_atual))
+        for personagem_classe in self.personagem_classes.all():
+            print('personagem_classe: {}'.format(personagem_classe))
+            print('bba do {}: {}'.format(personagem_classe, personagem_classe.get_bba()))
+            bba_atual += personagem_classe.get_bba()
+        return bba_atual
+
     class Meta:
         unique_together = ('jogador', 'nome')
 
 
 class PersonagemClasse(Model):
-    personagem = ForeignKey(Personagem, on_delete=CASCADE)
-    classe = ForeignKey(Classe, on_delete=PROTECT)
+    personagem = ForeignKey(Personagem, on_delete=CASCADE, related_name='personagem_classes')
+    classe = ForeignKey(Classe, on_delete=PROTECT, related_name='+')
     nivel = IntegerField()
 
     def __str__(self):
         return '{} | {}'.format(self.personagem, self.classe)
+
+    def get_bba(self):
+        assert isinstance(self.classe, Classe)
+        return self.classe.get_bba_nivel(self.nivel)
 
     class Meta:
         unique_together = ('personagem', 'classe')

@@ -115,6 +115,13 @@ class Classe(PolymorphicModel):
     def add_resistencia(self, resistencia):
         self.resistencias.append(resistencia)
 
+    def get_bba_nivel(self, nivel):
+        for bba in self.bbas.all():
+            assert isinstance(bba, Bba)
+            if bba.nivel == nivel:
+                return bba.valor
+        return 0
+
     def __str__(self):
         return self.nome
 
