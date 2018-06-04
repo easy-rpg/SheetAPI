@@ -493,7 +493,7 @@ CLASSES_PRESTIGIO = {
             PERICIAS['saltar']['instancia'],
             PERICIAS['sobrevivencia']['instancia']
         ],
-        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 10)),
+        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 11)),
         'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
             Resistencia.objects.filter(slug='ref',qualidade='ruim') |
             Resistencia.objects.filter(slug='von',qualidade='ruim')
@@ -531,7 +531,7 @@ CLASSES_PRESTIGIO = {
             PERICIAS['saltar']['instancia'],
             PERICIAS['sobrevivencia']['instancia']
         ],
-        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 10)),
+        'bbas': Bba.objects.filter(qualidade='boa', nivel__in=range(1, 11)),
         'resistencias': Resistencia.objects.filter(slug='fort',qualidade='boa') |
             Resistencia.objects.filter(slug='ref',qualidade='ruim') |
             Resistencia.objects.filter(slug='von',qualidade='ruim')
