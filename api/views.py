@@ -23,4 +23,4 @@ class UserViewSet(ModelViewSet):
     # ]
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'put', 'patch']

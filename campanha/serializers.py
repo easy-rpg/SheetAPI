@@ -4,6 +4,7 @@ from .models import Campanha, Arco
 
 class ArcoSerializer(ModelSerializer):
     campanha_nome = CharField(source='campanha.nome', read_only=True)
+    
     class Meta:
         model = Arco
         fields = '__all__'
@@ -11,6 +12,8 @@ class ArcoSerializer(ModelSerializer):
 
 class CampanhaSerializer(ModelSerializer):
     arcos = ArcoSerializer(many=True, read_only=True)
+    mestre_nome = CharField(source='mestre.first_name', read_only=True)
+
     class Meta:
         model = Campanha
         fields = '__all__'
