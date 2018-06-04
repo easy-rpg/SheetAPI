@@ -1,10 +1,10 @@
 from django.db.models import Model, OneToOneField, ForeignKey, CharField, CASCADE, SET_NULL
-from usuario.models import PerfilUsuario
+from django.contrib.auth.models import User
 
 
 class Campanha(Model):
     nome = CharField(max_length=30, unique=True)
-    mestre = ForeignKey(PerfilUsuario, on_delete=SET_NULL, null=True, related_name='campanhas')
+    mestre = ForeignKey(User, on_delete=SET_NULL, null=True, related_name='campanhas')
 
     def __str__(self):
         return self.nome

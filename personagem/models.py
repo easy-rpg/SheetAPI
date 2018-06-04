@@ -2,14 +2,14 @@ from django.db.models import Model, OneToOneField, ForeignKey, ManyToManyField, 
     CharField, IntegerField, FloatField, TextField, ImageField, \
     CASCADE, SET_NULL, PROTECT
 from model_utils import Choices
-from usuario.models import PerfilUsuario
+from django.contrib.auth.models import User
 from campanha.models import Arco
 from core.models import Tendencia, Raca, Classe, Modelo
 from .utils import get_personagem_upload_path
 
 
 class Personagem(Model):
-    usuario = ForeignKey(PerfilUsuario, on_delete=CASCADE)
+    jogador = ForeignKey(User, on_delete=CASCADE)
     arco = ForeignKey(Arco, on_delete=SET_NULL, null=True, related_name='personagens')
     nome = CharField(max_length=30, null=True, blank=True)
     foto = ImageField(upload_to=get_personagem_upload_path, null=True, blank=True)

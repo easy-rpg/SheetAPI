@@ -34,7 +34,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
-    'usuario.apps.UsuarioConfig',
     'campanha.apps.CampanhaConfig',
     'personagem.apps.PersonagemConfig',
     'django.contrib.admin',

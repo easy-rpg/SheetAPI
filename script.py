@@ -630,7 +630,7 @@ for nome, modelo in MODELOS.items():
         MODELOS[nome]['instancia'] = Modelo.objects.get(slug=modelo['slug'])
         # print(e)
 
-campanha = Campanha(nome='Campanha do Filé', mestre=rodrigo.perfil)
+campanha = Campanha(nome='Campanha do Filé', mestre=rodrigo)
 try:
     campanha.save()
 except IntegrityError as e:
@@ -644,13 +644,13 @@ except IntegrityError as e:
     arco = Arco.objects.get(nome='principal')
     # print(e)
 
-hieriling = Personagem(usuario=rodrigo.perfil, nome='Hieriling',
+hieriling = Personagem(usuario=rodrigo, nome='Hieriling',
                        tamanho='me', sexo='m', arco=arco,
                        tendencia=TENDENCIAS['LeN']['instancia'], raca=RACAS['anao']['instancia'])
 try:
     hieriling.save()
 except IntegrityError as e:
-    hieriling = Personagem.objects.get(usuario=rodrigo.perfil, nome='Hieriling')
+    hieriling = Personagem.objects.get(usuario=rodrigo, nome='Hieriling')
     print(e)
 
 try:
