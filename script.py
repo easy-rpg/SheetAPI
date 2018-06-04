@@ -644,7 +644,7 @@ except IntegrityError as e:
     arco = Arco.objects.get(nome='principal')
     # print(e)
 
-hieriling = Personagem(usuario=rodrigo, nome='Hieriling',
+hieriling = Personagem(jogador=rodrigo, nome='Hieriling',
                        tamanho='me', sexo='m', arco=arco,
                        tendencia=TENDENCIAS['LeN']['instancia'], raca=RACAS['anao']['instancia'])
 try:

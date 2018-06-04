@@ -1,4 +1,4 @@
-from django.db.models import Model, OneToOneField, ForeignKey, ManyToManyField, \
+from django.db.models import Model, ForeignKey, ManyToManyField, \
     CharField, IntegerField, FloatField, TextField, ImageField, \
     CASCADE, SET_NULL, PROTECT
 from model_utils import Choices
@@ -41,7 +41,7 @@ class Personagem(Model):
         return self.nome
 
     class Meta:
-        unique_together = ('usuario', 'nome')
+        unique_together = ('jogador', 'nome')
 
 
 class PersonagemClasse(Model):
