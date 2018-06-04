@@ -20,6 +20,7 @@ class ClassePrestigioSerializer(ModelSerializer):
 
 
 class ClassePolymorphicSerializer(PolymorphicSerializer):
+    resource_type_field_name = 'tipo'
     model_serializer_mapping = {
         Classe: ClasseSerializer,
         ClassePrestigio: ClassePrestigioSerializer
