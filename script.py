@@ -10,9 +10,9 @@ from core.models import Atributo, Resistencia, Tendencia, Bba, Pericia, Classe, 
 from campanha.models import Campanha, Arco
 from personagem.models import Personagem, PersonagemClasse
 
-for user in User.objects.all():
-    print(user)
-    del(user)
+# for user in User.objects.all():
+#     print(user)
+#     del(user)
 
 rodrigo = User(username='rodrigondec', email='rodrigondec@gmail.com',
                password='pbkdf2_sha256$100000$fQgW32ScWiVI$n3psZOWZvSqL8154DXXEBlRxpr1r57f6ANQSnF+qPU8=',
@@ -21,6 +21,15 @@ try:
     rodrigo.save()
 except IntegrityError as e:
     rodrigo = User.objects.get(username='rodrigondec')
+    # print(e)
+
+pedro = User(username='pedro', email='email@gmail.com',
+               password='pbkdf2_sha256$100000$56OCrdpEa2FY$vpll7fJFDOEioyefq2Duius3PSORAISHZODMz7w6u7g=',
+               is_staff=True, is_superuser=True)
+try:
+    pedro.save()
+except IntegrityError as e:
+    pedro = User.objects.get(username='pedro')
     # print(e)
 
 
@@ -650,11 +659,11 @@ hieriling = Personagem(jogador=rodrigo, nome='Hieriling',
 try:
     hieriling.save()
 except IntegrityError as e:
-    hieriling = Personagem.objects.get(usuario=rodrigo, nome='Hieriling')
-    print(e)
+    hieriling = Personagem.objects.get(jogador=rodrigo, nome='Hieriling')
+    # print(e)
 
 try:
     PersonagemClasse(personagem=hieriling, classe=CLASSES['clerigo']['instancia'], nivel=10).save()
     PersonagemClasse(personagem=hieriling, classe=CLASSES_PRESTIGIO['devoto_da_guerra']['instancia'], nivel=10).save()
 except IntegrityError as e:
-    print(e)
+    # print(e)
