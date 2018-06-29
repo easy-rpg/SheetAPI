@@ -667,3 +667,4 @@ try:
     PersonagemClasse(personagem=hieriling, classe=CLASSES_PRESTIGIO['devoto_da_guerra']['instancia'], nivel=10).save()
 except IntegrityError as e:
     # print(e)
+    pass
