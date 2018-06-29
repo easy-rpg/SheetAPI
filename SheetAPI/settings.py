@@ -32,7 +32,7 @@ SECRET_KEY = 'bfh-+v@!45=mydaor*1ji=$smfpfsy!_7dv)b^u$m80qwg3dl5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sheet-api.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
