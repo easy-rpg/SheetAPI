@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
 
@@ -18,9 +19,9 @@ class UserViewSet(ModelViewSet):
     update:
         Atualiza um usuário
     """
-    # permission_classes = [
-    #     IsAuthenticated,
-    # ]
+    permission_classes = [
+        IsAuthenticated,
+    ]
     queryset = User.objects.all()
     serializer_class = UserSerializer
     http_method_names = ['get', 'post', 'put', 'patch']
