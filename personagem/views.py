@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from api.permissions import IsOwner
 from .models import Personagem, PersonagemClasse, PersonagemModelo, PersonagemAtributo
 from .serializers import PersonagemSerializer, PersonagemClasseSerializer, PersonagemModeloSerializer, \
     PersonagemAtributoSerializer
@@ -19,9 +21,9 @@ class PersonagemViewSet(ModelViewSet):
     update:
         Atualiza um personagem
     """
-    # permission_classes = [
-    #     IsAuthenticated,
-    # ]
+    permission_classes = [
+        IsAuthenticated, IsOwner
+    ]
     queryset = Personagem.objects.all()
     serializer_class = PersonagemSerializer
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
@@ -34,6 +36,9 @@ class PersonagemClasseViewSet(ModelViewSet):
     partial_update:
         Atualiza um ou mais campos de uma classe de um personagem existente
     """
+    permission_classes = [
+        IsAuthenticated, IsOwner
+    ]
     queryset = PersonagemClasse.objects.all()
     serializer_class = PersonagemClasseSerializer
     http_method_names = ['post', 'patch']
@@ -46,6 +51,9 @@ class PersonagemModeloViewSet(ModelViewSet):
     partial_update:
         Atualiza um ou mais campos de um modelo de um personagem existente
     """
+    permission_classes = [
+        IsAuthenticated, IsOwner
+    ]
     queryset = PersonagemModelo.objects.all()
     serializer_class = PersonagemModeloSerializer
     http_method_names = ['post', 'patch']
@@ -56,6 +64,9 @@ class PersonagemAtributoViewSet(ModelViewSet):
     partial_update:
         Atualiza um ou mais campos de um atributo de um personagem existente
     """
+    permission_classes = [
+        IsAuthenticated, IsOwner
+    ]
     queryset = PersonagemAtributo.objects.all()
     serializer_class = PersonagemAtributoSerializer
     http_method_names = ['patch']

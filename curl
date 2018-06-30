@@ -1,0 +1,16 @@
+# token
+JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InJvZHJpZ29uZGVjQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicm9kcmlnb25kZWMiLCJleHAiOjE1MzAzOTcwNTR9.O2qc5rmTBEpKeDIQu8Y-oCwo1aiae0kRhhBn-Q4eHOY
+
+# get list users
+curl -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InJvZHJpZ29uZGVjQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicm9kcmlnb25kZWMiLCJleHAiOjE1MzAzOTcwNTR9.O2qc5rmTBEpKeDIQu8Y-oCwo1aiae0kRhhBn-Q4eHOY" http://127.0.0.1:8000/api/user/
+
+# get user from token
+curl -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InJvZHJpZ29uZGVjQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicm9kcmlnb25kZWMiLCJleHAiOjE1MzAzOTcwNTR9.O2qc5rmTBEpKeDIQu8Y-oCwo1aiae0kRhhBn-Q4eHOY" http://127.0.0.1:8000/api/user/token/
+
+
+# rodrigo upate personagem de rodrigo
+curl -X PATCH "http://127.0.0.1:8000/api/personagem/1/" -H  "accept: application/json" -H  "Content-Type: application/json" -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InJvZHJpZ29uZGVjQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicm9kcmlnb25kZWMiLCJleHAiOjE1MzAzOTcwNTR9.O2qc5rmTBEpKeDIQu8Y-oCwo1aiae0kRhhBn-Q4eHOY" -d "{  \"altura\": 1,  \"pele\": \"string\",  \"olhos\": \"string\",  \"nome\": \"string\",  \"lore\": \"string\",  \"peso\": 0,  \"cabelos\": \"string\",  \"idade\": 0}"
+
+# pedro  upate personagem de rodrigo
+curl -X PATCH "http://127.0.0.1:8000/api/personagem/1/" -H  "accept: application/json" -H  "Content-Type: application/json" -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImVtYWlsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicGVkcm8iLCJleHAiOjE1MzAzOTcxMTZ9.UkY_DpvAIhU2cZf2o3dtpfoaHRxgzhpJ3n4xSCHHrQI" -d "{  \"altura\": 1,  \"pele\": \"string\",  \"olhos\": \"string\",  \"nome\": \"string\",  \"lore\": \"string\",  \"peso\": 0,  \"cabelos\": \"string\",  \"idade\": 0}"
+
