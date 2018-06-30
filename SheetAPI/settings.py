@@ -168,8 +168,8 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # STATICFILES_STORAGE =  'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 
-LOGIN_URL='/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
 
 LOGGING = {
     'version': 1,
