@@ -77,6 +77,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'SheetAPI.wsgi.application'
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
