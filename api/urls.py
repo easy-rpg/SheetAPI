@@ -9,14 +9,14 @@ from personagem.views import PersonagemViewSet, PersonagemClasseViewSet, Persona
 
 
 router = routers.DefaultRouter()
-router.register('users', UserViewSet)
-router.register('campanhas', CampanhaViewSet)
-router.register('arcos', ArcoViewSet)
-router.register('classes', ClasseViewset)
-router.register('personagems', PersonagemViewSet)
-router.register('personagem_classes', PersonagemClasseViewSet)
-router.register('personagem_modelos', PersonagemModeloViewSet)
-router.register('personagem_atributos', PersonagemAtributoViewSet)
+router.register('user', UserViewSet)
+router.register('campanha', CampanhaViewSet)
+router.register('arco', ArcoViewSet)
+router.register('classe', ClasseViewset)
+router.register('personagem', PersonagemViewSet)
+router.register('personagem_classe', PersonagemClasseViewSet)
+router.register('personagem_modelo', PersonagemModeloViewSet)
+router.register('personagem_atributo', PersonagemAtributoViewSet)
 
 schema_view = get_swagger_view(title='RPG Sheet API')
 
