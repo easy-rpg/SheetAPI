@@ -5,4 +5,5 @@ psql rpg_sheet
 
 dropdb rpg_sheet
 
-sudo /etc/init.d/postgresql restart
+sudo pg_ctlcluster 9.6 main start
+sudo pg_ctlcluster 9.6 main stop
