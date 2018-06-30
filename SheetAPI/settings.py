@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from .config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+import dj_database_url
+
+
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 
 SETTINGS_DIR = os.path.dirname(__file__)
@@ -98,16 +104,7 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-    }
-}
+DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
 
 # Password validation
@@ -144,6 +141,7 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
@@ -156,10 +154,12 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')  # Absolute path to the media directory
 
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # STATICFILES_STORAGE =  'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-LOGIN_URL = '/login/'
+
+LOGIN_URL='/login/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGGING = {
