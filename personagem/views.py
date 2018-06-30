@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from api.permissions import IsOwner
 from .models import Personagem, PersonagemClasse, PersonagemModelo, PersonagemAtributo
 from .serializers import PersonagemSerializer, PersonagemClasseSerializer, PersonagemModeloSerializer, \
     PersonagemAtributoSerializer
@@ -21,7 +22,7 @@ class PersonagemViewSet(ModelViewSet):
         Atualiza um personagem
     """
     permission_classes = [
-        IsAuthenticated,
+        IsAuthenticated, IsOwner
     ]
     queryset = Personagem.objects.all()
     serializer_class = PersonagemSerializer
@@ -36,7 +37,7 @@ class PersonagemClasseViewSet(ModelViewSet):
         Atualiza um ou mais campos de uma classe de um personagem existente
     """
     permission_classes = [
-        IsAuthenticated,
+        IsAuthenticated, IsOwner
     ]
     queryset = PersonagemClasse.objects.all()
     serializer_class = PersonagemClasseSerializer
@@ -51,7 +52,7 @@ class PersonagemModeloViewSet(ModelViewSet):
         Atualiza um ou mais campos de um modelo de um personagem existente
     """
     permission_classes = [
-        IsAuthenticated,
+        IsAuthenticated, IsOwner
     ]
     queryset = PersonagemModelo.objects.all()
     serializer_class = PersonagemModeloSerializer
@@ -64,7 +65,7 @@ class PersonagemAtributoViewSet(ModelViewSet):
         Atualiza um ou mais campos de um atributo de um personagem existente
     """
     permission_classes = [
-        IsAuthenticated,
+        IsAuthenticated, IsOwner
     ]
     queryset = PersonagemAtributo.objects.all()
     serializer_class = PersonagemAtributoSerializer

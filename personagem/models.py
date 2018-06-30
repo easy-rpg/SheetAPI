@@ -53,6 +53,10 @@ class Personagem(Model):
         return self.nome
 
     @property
+    def get_owner(self):
+        return self.jogador
+
+    @property
     def bba(self):
         # print('getting bba')
         bba_atual = 0
@@ -75,6 +79,10 @@ class PersonagemClasse(Model):
     def __str__(self):
         return '{} | {}'.format(self.personagem, self.classe)
 
+    @property
+    def get_owner(self):
+        return self.personagem.jogador
+
     def get_bba(self):
         assert isinstance(self.classe, Classe)
         return self.classe.get_bba_nivel(self.nivel)
@@ -89,6 +97,10 @@ class PersonagemModelo(Model):
 
     def __str__(self):
         return '{} | {}'.format(self.personagem, self.modelo)
+
+    @property
+    def get_owner(self):
+        return self.personagem.jogador
 
     @property
     def nome(self):
@@ -106,6 +118,10 @@ class PersonagemAtributo(Model):
 
     def __str__(self):
         return self.nome
+
+    @property
+    def get_owner(self):
+        return self.personagem.jogador
 
     @property
     def mod(self):
