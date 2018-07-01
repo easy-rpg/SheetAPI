@@ -5,4 +5,14 @@ psql rpg_sheet
 
 dropdb rpg_sheet
 
+sudo pg_ctlcluster 9.6 main start
+sudo pg_ctlcluster 9.6 main stop
+
 sudo /etc/init.d/postgresql restart
+
+disable service(not auto-start any more)
+    sudo systemctl disable postgresql
+
+enable service postgresql(auto-start)
+    sudo systemctl enable postgresql
+
