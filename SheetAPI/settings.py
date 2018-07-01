@@ -59,9 +59,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,20 +107,40 @@ REST_FRAMEWORK = {
 
 DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
-
-CORS_ORIGIN_WHITELIST = (
-    '*'
-    # 'https://easy-rpg.github.io/Sheet/',
-    # 'localhost:8080',
-    # '127.0.0.1:8080'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 )
-
-CSRF_TRUSTED_ORIGINS = (
-    '*'
-    # 'https://easy-rpg.github.io/Sheet/',
-    # 'localhost:8080',
-    # '127.0.0.1:8080'
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 )
+# CORS_ORIGIN_WHITELIST = (
+# #     '*'
+#     'https://easy-rpg.github.io',
+#     'localhost:8080',
+#     '127.0.0.1:8080'
+# )
+# #
+# CSRF_TRUSTED_ORIGINS = (
+# #     '*'
+#     'https://easy-rpg.github.io/',
+#     'localhost:8080',
+#     '127.0.0.1:8080'
+# )
 
 
 # Password validation
