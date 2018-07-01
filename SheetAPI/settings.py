@@ -118,6 +118,19 @@ DATABASES = {
 }
 
 
+CORS_ORIGIN_WHITELIST = (
+    'https://easy-rpg.github.io/Sheet/',
+    'localhost:8080',
+    '127.0.0.1:8080'
+)
+
+CSRF_TRUSTED_ORIGINS = (
+    'https://easy-rpg.github.io/Sheet/',
+    'localhost:8080',
+    '127.0.0.1:8080'
+)
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
