@@ -31,7 +31,9 @@ class PersonagemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
 
     def list(self, request, *args, **kwargs):
-        return Response(self.serializer_class(request.user.personagens, many=True).data, status=HTTP_200_OK)
+        serializer = self.get_serializer(data=request.user.personagens, many=True)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=HTTP_200_OK, headers=headers)
 
 
 class PersonagemClasseViewSet(ModelViewSet):
