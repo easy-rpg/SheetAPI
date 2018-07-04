@@ -35,9 +35,8 @@ class CampanhaViewSet(ModelViewSet):
         for campanha in request.user.campanhas.all():
             if campanha not in campanhas:
                 campanhas.append(campanha)
-        serializer = self.get_serializer(data=campanhas, many=True)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=HTTP_200_OK, headers=headers)
+        headers = self.get_success_headers(self.serializer_class(campanhas, many=True).data)
+        return Response(self.serializer_class(campanhas, many=True).data, status=HTTP_200_OK, headers=headers)
 
     @action(methods=['get'], detail=False)
     def jogando(self, request, *args, **kwargs):
@@ -48,9 +47,8 @@ class CampanhaViewSet(ModelViewSet):
         for personagem in request.user.personagens.all():
             if personagem.arco.campanha not in campanhas:
                 campanhas.append(personagem.arco.campanha)
-        serializer = self.get_serializer(data=campanhas, many=True)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=HTTP_200_OK, headers=headers)
+        headers = self.get_success_headers(self.serializer_class(campanhas, many=True).data)
+        return Response(self.serializer_class(campanhas, many=True).data, status=HTTP_200_OK, headers=headers)
 
 
 class ArcoViewSet(ModelViewSet):
@@ -80,6 +78,5 @@ class ArcoViewSet(ModelViewSet):
         for personagem in request.user.personagens.all():
             if personagem.arco not in arcos:
                 arcos.append(personagem.arco)
-        serializer = self.get_serializer(data=arcos, many=True)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=HTTP_200_OK, headers=headers)
+        headers = self.get_success_headers(self.serializer_class(arcos, many=True).data)
+        return Response(self.serializer_class(arcos, many=True).data, status=HTTP_200_OK, headers=headers)
