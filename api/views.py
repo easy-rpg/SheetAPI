@@ -26,8 +26,8 @@ class UserViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'patch']
 
     @action(methods=['get'], detail=False)
-    def token(self, request):
+    def me(self, request):
         """
-        Retorna o usuario pelo token
+        Retorna o usuario autenticado
         """
         return Response(self.serializer_class(request.user).data)

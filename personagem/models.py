@@ -10,7 +10,7 @@ from .utils import get_personagem_upload_path
 
 
 class Personagem(Model):
-    jogador = ForeignKey(User, on_delete=CASCADE)
+    jogador = ForeignKey(User, on_delete=CASCADE, related_name='personagens')
     arco = ForeignKey(Arco, on_delete=SET_NULL, null=True, related_name='personagens')
     nome = CharField(max_length=30, null=True, blank=True)
     foto = ImageField(upload_to=get_personagem_upload_path, null=True, blank=True)
@@ -53,7 +53,7 @@ class Personagem(Model):
         return self.nome
 
     @property
-    def get_owner(self):
+    def owner(self):
         return self.jogador
 
     @property
@@ -80,7 +80,7 @@ class PersonagemClasse(Model):
         return '{} | {}'.format(self.personagem, self.classe)
 
     @property
-    def get_owner(self):
+    def owner(self):
         return self.personagem.jogador
 
     def get_bba(self):
@@ -99,7 +99,7 @@ class PersonagemModelo(Model):
         return '{} | {}'.format(self.personagem, self.modelo)
 
     @property
-    def get_owner(self):
+    def owner(self):
         return self.personagem.jogador
 
     @property
@@ -120,7 +120,7 @@ class PersonagemAtributo(Model):
         return self.nome
 
     @property
-    def get_owner(self):
+    def owner(self):
         return self.personagem.jogador
 
     @property

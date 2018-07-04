@@ -9,6 +9,10 @@ class Campanha(Model):
     def __str__(self):
         return self.nome
 
+    @property
+    def owner(self):
+        return self.mestre
+
 
 class Arco(Model):
     nome = CharField(max_length=30, unique=True)
@@ -16,3 +20,7 @@ class Arco(Model):
 
     def __str__(self):
         return '{} | {}'.format(self.campanha, self.nome)
+
+    @property
+    def owner(self):
+        return self.campanha.mestre
