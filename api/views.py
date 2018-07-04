@@ -52,9 +52,8 @@ class UserViewSet(ModelViewSet):
         """
         Retorna o usuario autenticado
         """
-        serializer = self.get_serializer(data=request.user)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=HTTP_200_OK, headers=headers)
+        headers = self.get_success_headers(self.serializer_class(request.user).data)
+        return Response(self.serializer_class(request.user).data, status=HTTP_200_OK, headers=headers)
 
     @action(methods=['patch'], detail=True, serializer_class=PasswordSerializer)
     def set_password(self, request, pk=None):
