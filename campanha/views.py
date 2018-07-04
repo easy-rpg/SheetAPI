@@ -7,7 +7,7 @@ class CampanhaViewSet(ModelViewSet):
     retrieve:
         Retorna uma campanha
     list:
-        Retorna todas as campanhas
+        Retorna todas as campanhas do usuário
     create:
         Cria uma nova campanha
     delete:
@@ -20,6 +20,9 @@ class CampanhaViewSet(ModelViewSet):
     queryset = Campanha.objects.all()
     serializer_class = CampanhaSerializer
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+
+    # def list(self, request, *args, **kwargs):
+
 
 
 class ArcoViewSet(ModelViewSet):

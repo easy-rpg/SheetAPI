@@ -1,6 +1,6 @@
-from rest_framework.serializers import ModelSerializer, IntegerField, CharField, StringRelatedField
+from rest_framework.serializers import ModelSerializer, CharField, StringRelatedField
 from .models import Personagem, PersonagemClasse, PersonagemModelo, PersonagemAtributo
-from core.serializers import ClasseSerializer
+from campanha.serializers import ArcoSerializer
 
 
 class PersonagemClasseSerializer(ModelSerializer):
@@ -35,8 +35,9 @@ class PersonagemAtributoSerializer(ModelSerializer):
 
 
 class PersonagemSerializer(ModelSerializer):
-    jodador_nome = StringRelatedField(source='jogador.first_name', read_only=True)
-    arco_nome = StringRelatedField(source='arco', read_only=True)
+    arco_data = ArcoSerializer(source='arco', read_only=True)
+    jodador_nome = StringRelatedField(source='jogador.username', read_only=True)
+    # arco_nome = StringRelatedField(source='arco', read_only=True)
     classes = PersonagemClasseSerializer(many=True, read_only=True)
     modelos = PersonagemModeloSerializer(many=True, read_only=True)
     atributos = PersonagemAtributoSerializer(many=True, read_only=True)

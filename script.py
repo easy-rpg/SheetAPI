@@ -11,8 +11,35 @@ from campanha.models import Campanha, Arco
 from personagem.models import Personagem, PersonagemClasse
 
 # for user in User.objects.all():
-#     print(user)
-#     del(user)
+    # print(user)
+    # del(user)
+
+diuis = User(username='deiwis', email='deiwis@gmail.com',
+               password='pbkdf2_sha256$100000$umk9aYeeTufE$k0k+GGRZxApnRLx8NMS/gfUbUR6RbjETRYYIs7PUIZg=')
+# diuis123
+try:
+    diuis.save()
+except IntegrityError as e:
+    diuis = User.objects.get(username='deiwis')
+    # print(e)
+
+snow = User(username='snow', email='g.vieira@gmail.com',
+               password='pbkdf2_sha256$100000$OHwo85EwVVJE$snVO3BDuY4XPQ3qEs3oYbjXNVXYbHY0//nvWQxBsT5k=')
+# gabriel123
+try:
+    snow.save()
+except IntegrityError as e:
+    snow = User.objects.get(username='snow')
+    # print(e)
+
+clara = User(username='claranobre', email='claranobre@gmail.com',
+               password='pbkdf2_sha256$100000$jUIxYTOY6WKT$H+SrROzNmkT1QKZ+huL5vjVEQAFeMzYBC8gqhSDaNXE=')
+# clara123
+try:
+    clara.save()
+except IntegrityError as e:
+    clara = User.objects.get(username='claranobre')
+    # print(e)
 
 rodrigo = User(username='rodrigondec', email='rodrigondec@gmail.com',
                password='pbkdf2_sha256$100000$fQgW32ScWiVI$n3psZOWZvSqL8154DXXEBlRxpr1r57f6ANQSnF+qPU8=',
@@ -639,7 +666,7 @@ for nome, modelo in MODELOS.items():
         MODELOS[nome]['instancia'] = Modelo.objects.get(slug=modelo['slug'])
         # print(e)
 
-campanha = Campanha(nome='Campanha do Filé', mestre=rodrigo)
+campanha = Campanha(nome='Campanha do Filé', mestre=diuis)
 try:
     campanha.save()
 except IntegrityError as e:
