@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from api.permissions import IsOwner
 from .models import Personagem, PersonagemClasse, PersonagemModelo, PersonagemAtributo
 from .serializers import PersonagemSerializer, PersonagemClasseSerializer, PersonagemModeloSerializer, \
@@ -11,7 +12,7 @@ class PersonagemViewSet(ModelViewSet):
     retrieve:
         Retorna um personagem
     list:
-        Retorna todos os personagens
+        Retorna todos os personagens do usuário
     create:
         Cria um novo personagem
     delete:
@@ -27,6 +28,9 @@ class PersonagemViewSet(ModelViewSet):
     queryset = Personagem.objects.all()
     serializer_class = PersonagemSerializer
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+
+    def list(self, request, *args, **kwargs):
+        return Response(self.serializer_class(request.user.personagens, many=True).data)
 
 
 class PersonagemClasseViewSet(ModelViewSet):
