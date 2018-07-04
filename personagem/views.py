@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 from api.permissions import IsOwner
 from .models import Personagem, PersonagemClasse, PersonagemModelo, PersonagemAtributo
 from .serializers import PersonagemSerializer, PersonagemClasseSerializer, PersonagemModeloSerializer, \
@@ -30,7 +31,7 @@ class PersonagemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'patch', 'delete']
 
     def list(self, request, *args, **kwargs):
-        return Response(self.serializer_class(request.user.personagens, many=True).data)
+        return Response(self.serializer_class(request.user.personagens, many=True).data, status=HTTP_200_OK)
 
 
 class PersonagemClasseViewSet(ModelViewSet):
