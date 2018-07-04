@@ -11,9 +11,6 @@ class ClasseViewset(ModelViewSet):
     list:
         Retorna todas as classes
     """
-    permission_classes = [
-        AllowAny,
-    ]
     queryset = Classe.objects.all()
     serializer_class = ClassePolymorphicSerializer
     http_method_names = ['get']

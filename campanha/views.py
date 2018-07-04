@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.status import HTTP_200_OK
 from api.permissions import IsOwnerOrRead
 from .models import Campanha, Arco
 from .serializers import CampanhaSerializer, ArcoSerializer
@@ -34,7 +35,7 @@ class CampanhaViewSet(ModelViewSet):
         for campanha in request.user.campanhas.all():
             if campanha not in campanhas:
                 campanhas.append(campanha)
-        return Response(self.serializer_class(campanhas, many=True).data)
+        return Response(self.serializer_class(campanhas, many=True).data, status=HTTP_200_OK)
 
     @action(methods=['get'], detail=False)
     def jogando(self, request, *args, **kwargs):
@@ -45,7 +46,7 @@ class CampanhaViewSet(ModelViewSet):
         for personagem in request.user.personagens.all():
             if personagem.arco.campanha not in campanhas:
                 campanhas.append(personagem.arco.campanha)
-        return Response(self.serializer_class(campanhas, many=True).data)
+        return Response(self.serializer_class(campanhas, many=True).data, status=HTTP_200_OK)
 
 
 class ArcoViewSet(ModelViewSet):
@@ -75,4 +76,4 @@ class ArcoViewSet(ModelViewSet):
         for personagem in request.user.personagens.all():
             if personagem.arco not in arcos:
                 arcos.append(personagem.arco)
-        return Response(self.serializer_class(arcos, many=True).data)
+        return Response(self.serializer_class(arcos, many=True).data, status=HTTP_200_OK)
