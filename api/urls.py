@@ -24,7 +24,7 @@ schema_view = get_swagger_view(title='RPG Sheet API')
 urlpatterns = [
     path('', schema_view),
     path('', include(router.urls)),
-    path('create_user', CreateUserView.as_view()),
+    path('create_user/', CreateUserView.as_view()),
     path('auth/', obtain_jwt_token),
     path('auth-refresh/', refresh_jwt_token),
     path('ui-auth/', include('rest_framework.urls'))
