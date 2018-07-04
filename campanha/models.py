@@ -1,4 +1,4 @@
-from django.db.models import Model, OneToOneField, ForeignKey, CharField, CASCADE, SET_NULL
+from django.db.models import Model, ForeignKey, CharField, CASCADE, SET_NULL
 from django.contrib.auth.models import User
 
 
