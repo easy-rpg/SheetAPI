@@ -38,8 +38,8 @@ class UserViewSet(ModelViewSet):
         """
         return Response(self.serializer_class(request.user).data, status=HTTP_200_OK)
 
-    @action(methods=['post'], detail=False, serializer_class=PasswordSerializer)
-    def set_password(self, request):
+    @action(methods=['patch'], detail=True, serializer_class=PasswordSerializer)
+    def set_password(self, request, pk=None):
         """
         Altera a senha do usuario autenticado
         """
