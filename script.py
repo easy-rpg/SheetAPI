@@ -695,3 +695,6 @@ try:
 except IntegrityError as e:
     # print(e)
     pass
+
+
+print('script ok.')
