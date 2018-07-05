@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import UserViewSet, CreateUserView
 from campanha.views import CampanhaViewSet, ArcoViewSet
 from core.views import ClasseViewset
@@ -25,7 +25,7 @@ urlpatterns = [
     path('', schema_view),
     path('', include(router.urls)),
     path('create_user/', CreateUserView.as_view()),
-    path('auth/', obtain_jwt_token),
-    path('auth-refresh/', refresh_jwt_token),
+    path('auth/', TokenObtainPairView.as_view()),
+    path('auth/refresh/', TokenRefreshView.as_view()),
     path('ui-auth/', include('rest_framework.urls'))
 ]
